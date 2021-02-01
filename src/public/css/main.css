@@ -1,0 +1,684 @@
+body{
+  
+    background: #4B79A1;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #283E51, #4B79A1);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #283E51, #4B79A1); 
+    
+}
+    .navbar{
+ 	
+        box-shadow: 1px 2px 2px rgb(12, 12, 12);
+   
+    }
+
+   
+    ul#ejm2 li a.le{
+        position: relative;
+       
+        /* color:#0E83CD; */
+        color:#EA9C3B;
+        margin: 0px 15px;
+       
+        
+    }
+    ul#ejm2 li a.le:after{
+        position: absolute;
+        bottom: 7px;
+        left: 0px;
+        width: 100%;
+        height: 4px;
+        background-color: #EA9C3B;
+        content: "";
+        opacity: 0;
+        transition: opacity 0.3s ease 0s, transform 0.3s ease 0s;
+        transform: translateY(20px);        
+    }
+    ul#ejm2 li a.le:hover:after{
+        opacity:1;
+        transform: translateY(15px)
+    }
+    
+       .rkl{
+        position: relative;
+       
+     
+        margin: 0px 15px;
+        
+    }
+    .rkl:after{
+        position: absolute;
+        bottom: 7px;
+        left: 0px;
+        width: 100%;
+        height: 4px;
+      
+        content: "";
+        opacity: 0;
+        transition: opacity 0.3s ease 0s, transform 0.3s ease 0s;
+        transform: translateY(20px);        
+    }
+    .rkl:hover:after{
+        opacity:1;
+        transform: translateY(15px)
+    }
+    
+    
+    .kr{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+    #vs{
+        font-size: 12px;
+    }
+    #kev{
+        width: 100px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;  
+    }
+
+    .textjust{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;  
+    }
+
+    .textjust2{
+        font-size: 0.8em;
+        white-space: nowrap;
+        text-overflow:clip;
+        overflow: hidden; 
+        
+    }
+    .textteam{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden; 
+    }
+
+    .par{
+        white-space: nowrap; 
+        width: 50px; 
+        overflow: hidden;
+        text-overflow: ellipsis;  
+    }
+    .team{
+        width: 40%;
+        white-space: nowrap;
+        text-overflow:initial;
+        overflow: hidden;  
+    }
+
+    ·bet{
+        background-color: #0E83CD;
+        justify-content: space-between;
+       
+    }
+   
+    .contenido{
+        width:100%;
+        display:flex;
+        flex-wrap:wrap;
+        padding-top: 1%;
+        }
+
+       #cont1{
+        background-color: #232C31;
+        
+        flex:3;
+        margin:5px;
+        
+        min-width:400px;
+        padding:20px;
+        border: 1px solid rgb(12, 12, 12);
+        border-radius: 50px 0px 0px 0px;
+       }
+       .torneo{
+        background-size: 100% 100%;
+       }
+    
+       .teco{
+       color: rgb(43, 42, 42);
+     }
+
+       .conten23{
+           width: 1000px;
+           padding:20px;
+           margin:5px;
+           min-width:400px;
+       }
+
+       .dropdown-menu >  a:hover {
+        background-image: none;
+        background-color: #2A8EBD !important;
+    }
+
+   .devitems{
+    border-radius: 50px 0px 0px 0px;
+    }
+
+  
+  
+        .inner{
+         background-color: #21282c;
+         border: 1px solid rgb(12, 12, 12);
+           margin:5px;
+        flex:1;
+        min-width:480px;
+        height: 1098px;
+        padding:20px;
+        }
+
+        .inner2{
+            
+            flex:1;
+            min-width:400px;
+            height: 800px;
+            
+        }
+        
+        .del{
+            cursor: pointer;
+            box-shadow: inset 0 0 0 1px rgb(12, 12, 12);
+          
+        }
+
+        .borddev{
+           border: 1px solid rgb(12, 12, 12);
+        }
+
+        .iconbord{
+            box-shadow: inset 0 0 0 0.5px rgb(12, 12, 12);
+        }
+     
+        #navbarDropdown{
+            cursor: pointer;
+        }
+        .por{
+            font-size: 0.7em;
+
+        }
+        
+      
+        .bgplomo{
+            background-color: #343A40;
+        }
+       .totac{
+           font-size: 0.8em;
+
+        }
+        .mre{
+            font-size: 0.9em;
+        }
+   
+
+        .orob:hover{
+            border-bottom: 1px solid #C69400 ;
+            background-image: linear-gradient(to bottom, rgb(246, 187, 17,0.2),rgba(252, 207, 73,0.1), #343a40, #343a40);
+            cursor: pointer;
+           
+
+        }
+        .bga{
+           background: #57839A ;;
+        }
+
+        .Dota:hover{
+          
+            border-bottom: 1px solid rgba(194 ,53 ,42) ;
+            background-image: linear-gradient(to bottom, rgb(218, 90, 80,0.2),rgba(255, 143, 134,0.1), #343a40, #343a40);
+            cursor: pointer;
+           
+           
+        }
+        .Csgo:hover{
+            
+            border-bottom: 1px solid rgba(157 ,160 ,163) ;
+            background-image: linear-gradient(to bottom, rgb(126 ,132, 138,0.4),rgba(208, 209, 210,0.1), #343a40, #343a40);
+
+            cursor: pointer;
+           
+            
+        }
+        .League:hover{
+            border-bottom: 1px solid rgba(222 ,164 ,96) ;
+            background-image: linear-gradient(to bottom, rgb(189 ,128, 57,0.3),rgba(255 ,207 ,149,0.1), #343a40, #343a40);
+
+            cursor: pointer;
+            
+        }
+        .Watch:hover{
+            border-bottom: 1px solid #7D6632 ;
+            background-image: linear-gradient(to bottom, rgb(99 ,77 ,27,0.4),rgba(159, 135 ,82,0.1), #343a40, #343a40);
+
+            cursor: pointer;
+            
+        }
+        .Hearth:hover{
+            border-bottom: 1px solid #677DA8;
+            background-image: linear-gradient(to bottom, rgb(68, 93 ,142,0.5),rgba(150 ,167, 201,0.1), #343a40, #343a40);
+
+            cursor: pointer;
+            
+        }
+        .Sports:hover{
+            border-bottom: 1px solid #E47C6E;
+            background-image: linear-gradient(to bottom, rgb(189 ,79, 65,0.4),rgba(255 ,173, 162,0.1), #343a40, #343a40);
+       
+            cursor: pointer;  
+        }
+      
+        .Games:hover{
+           
+            border-bottom: 1px solid #1185E0;
+            background-image: linear-gradient(to bottom, rgb(5, 119, 206,0.3),rgba(58 ,154, 227,0.1), #343a40, #343a40);
+       
+            cursor: pointer;  
+        }
+
+
+        .skin{
+            border: 1px solid rgb(12, 12, 12);
+            
+        
+        }
+        .skin:hover{
+            border-top: 1px solid #1185E0;
+            background-image: linear-gradient(to top, rgb(5, 119, 206,0.3),rgba(58 ,154, 227,0.1), #343a40, #343a40);
+       
+            cursor: pointer;  
+        }
+        .contenido2{
+            background-color: #232C31;
+            
+            flex:3;
+            margin:5px;
+            height: 500px;
+            min-width:400px;
+            padding:20px;
+            border: 1px solid rgb(12, 12, 12);
+            border-radius: 50px 0px 0px 0px;
+            }
+            .inner2{
+                background-color: #232C31;
+                margin:5px;
+                flex:1;
+                min-width:200px;
+                height: 500px;
+                padding:20px;
+            }
+            .divskin2{
+                height: 495px;
+            }
+            .textl{
+                color:rgb(247, 174, 101);
+            }
+           
+       .scril{
+        overflow-y: scroll;
+        width: 100%;
+        height: 600px;
+       }
+       .scrol{
+        overflow-y: scroll;
+       }
+       .divhei{
+        height: 520px;
+    
+       }
+       .jt{
+           font-size: .7em;
+       }
+       .tj2{
+           font-size: .9em;
+       }
+
+       .apueslist{
+           background-color:  rgba(214 ,216, 219,0.6);
+       }
+
+       .apueslist:hover{
+        background-color:  rgba(214 ,216, 219,0.7);
+       }
+
+
+
+       .contenido3{
+        width:95%;
+        background-color: #232C31;
+        display:flex;
+        flex-wrap:wrap;
+        }
+        .inner3{   
+        margin:5px;
+        height: 500px;
+        flex:1;
+        min-width:400px;
+        
+        padding:20px;
+        }
+        #inner4{
+            width: 950px;
+            height: 500px;
+        } 
+        .ph{
+            height: 600px;
+        }
+       .ph2 > .row{
+        height: 240px;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+       }
+       
+       .ph2 > .row > .col4 {
+        margin: 2px;
+         display: inline-block;
+        }
+
+        .ph2 > .row > .col3 {
+             border-left: 1px solid   rgba(214 ,216, 219,0.7);
+             display: inline-block;
+           
+            }
+          
+           
+
+        .color{
+            background-color: #232C31;
+        }
+
+        .bord1{
+           
+            border-left:1px solid rgb(12, 12, 12) ;
+            border-right: 1px solid rgb(12, 12, 12);
+        }
+        .bordt2{
+           
+           
+            border-top: 1px solid rgb(12, 12, 12);
+        }
+        .brt{
+          border-top: 1px solid rgba(108 ,117 ,125,0.8);
+          border-bottom: 1px solid rgba(108 ,117 ,125,0.8);
+        }
+
+        .bordright{
+            border-right: 1px solid #2A8EBD;
+
+        }
+        .bord2{
+            border-left:1px solid rgb(12, 12, 12) ;
+            border-right: 1px solid rgb(12, 12, 12);
+            border-bottom: 1px solid rgb(12, 12, 12);
+        }
+        .bordbo{
+            border-bottom: 1px solid rgb(12, 12, 12);
+        }
+
+        .bord3{
+            border-left:1px solid rgb(12, 12, 12) ;
+            border-right: 1px solid rgb(12, 12, 12);
+            
+        }
+
+        .bord4{
+            border-left:1px solid rgb(12, 12, 12) ;
+            border-right:  rgb(12, 12, 12);
+            border-top:1px solid rgb(12, 12, 12); ;
+
+        }
+        .bordl{
+            border-left: 1px solid rgba( 157 ,160, 163,0.7) ;
+        }
+        .bordert{
+        
+            border-top:1px solid  rgb(12, 12, 12);
+        }
+
+        .badco{
+           background-color: #2A8EBD;
+        }
+
+        .stylblue{
+            background-color: rgba(42, 142 ,189,0.6);
+        }
+
+        .stylplom{
+            background-color: rgba(108 ,117 ,125,0.8);
+        }
+        .stylver{
+            background-color: rgba(40, 167 ,69,0.7);
+
+        }
+        .stylverl{
+            background-color: rgba(241, 47, 47, 0.7);
+
+        }
+
+
+        .oro{
+            background: rgb(198,148,0);
+            background: linear-gradient(90deg, rgba(198,148,0,0.5) 0%, rgba(255,205,57,0.6) 48%, rgba(255,216,100,0.7) 100%);
+        }
+            .orobord{
+                border-bottom: 1px solid rgba(  1255, 191 ,0,0.6) ;
+           
+        }
+        
+            .plata{
+                background: rgb(96,106,116);
+                background: linear-gradient(90deg, rgba(96,106,116,0.5) 0%, rgba(126,132,138,0.6) 48%, rgba(208,209,210,0.7) 100%);
+          
+        }
+        .platabord{
+            border-bottom: 1px solid rgba( 157 ,160, 163,0.7) ;
+       
+    }
+   .platabordt{
+          border-top: 1px solid rgba( 157 ,160, 163,0.7) ;
+    }
+    .azul{
+        background: rgb(42,141,189);
+        background: linear-gradient(90deg, rgba(42,141,189,0.4) 0%, rgba(75,161,203,0.5) 48%, rgba(117,186,220,0.6) 100%);
+    }
+
+    .azulbord{
+        border-bottom: 1px solid #2A8DBD ;
+    }
+
+        .cobre{
+            background: rgb(85, 0, 0);
+            background: linear-gradient(90deg, rgba(128, 21, 21,0.3) 0%, rgba(212, 106, 106,0.3) 48%, rgba(255, 170, 170,0.3) 100%);
+        }
+        .cobbord{
+            border-bottom: 1px solid rgba(128, 21, 21,1) ;
+        }
+
+        .catego{
+            height: 50px;
+        }
+
+.badoro{
+    background-color: #ffbf00;
+}
+.badpla{
+    background-color: #4B535B;  
+}
+.badcob{
+    background-color: #574E47;
+}
+.badazul{
+    background-color: #2A8DBD;
+}
+.bordleft{
+    border-left:1px solid #2A8DBD ;
+
+}
+
+      .bordtop {
+        border-left:1px solid rgb(12, 12, 12) ;
+        border-top:1px solid rgb(12, 12, 12)  ;
+        border-bottom: 1px solid rgb(12, 12, 12);
+
+      }
+    
+
+      .bordtr{
+   
+        border-top:1px solid #4B535B ;
+        
+
+      }
+
+      .flecha{
+        text-align:center;
+        font-size:180%;
+        
+        font-family: Calibri, arial, sans-serif;
+      }
+
+      .to-top{
+        color:white;
+        margin-top: .5rem;
+        padding-top:1em;
+        display:inline-block;/* or block */
+        position:relative;
+        border-color:white;
+        text-decoration:none;
+        transition:all .3s ease-out;
+        
+    }
+    .to-top:before{
+       
+        content:'▼';
+        font-size:0.9em;
+        position:absolute;
+        top:0;
+        left:50%;
+        margin-left:-.7em;
+        border:solid .13em white;
+        border-radius:10em;
+        width:1.4em;
+        height:1.4em;
+        line-height:1.3em;
+        border-color:inherit;
+        transition:transform .4s ease-in;
+    }
+    .to-top:hover{
+        color:#2A8DBD;
+        border-color:#5A869D;
+        cursor: pointer;
+    }
+    .to-top:hover:before{
+        transform: rotate(180deg);
+    }
+
+    .est{
+        font-size:0.6em;
+    }
+    .estad{
+        font-size:0.5em;
+        color: white;
+    }
+    .enc{
+        font-size:0.7em;
+    }
+    .winn{
+        font-size:0.7em;
+    }
+
+    .ques{
+        background-color: rgba(129 ,134, 138,0.5);
+    }
+
+    .ques:hover{
+        background-color: rgba(129 ,134, 138,1);
+    }
+    .beton:focus {
+        outline: none;
+   }
+   .btnr{
+       background-color: rgba(220 ,53, 69,0.9)
+
+   }
+   .btnv{
+       background-color: rgba(40 ,167 ,69,0.9);
+}
+   
+
+
+  
+ .consola{
+    width: 96%;
+    
+     
+ 
+  
+ }
+ .cardper{
+     width: 12rem;
+     height: 220px;
+   
+ }
+ .cardper2{
+    width: 12rem;
+    height: 12rem;
+  
+}
+
+ .my-custom-scrollbar {
+    position: relative;
+    height: 200px;
+    overflow: auto;
+    
+    }
+ .table-bet{
+    width: 98%;
+    height: 500px;
+    border: 1px solid rgb(12, 12, 12);
+  
+ } 
+
+
+
+
+ input[type=number]::-webkit-inner-spin-button, 
+ input[type=number]::-webkit-outer-spin-button { 
+   -webkit-appearance: none; 
+   margin: 0; 
+ }
+ 
+ input[type=number] { -moz-appearance:textfield; }
+
+ .cursor{
+        cursor: pointer;
+     } 
+.cursor:hover{
+    box-shadow: inset 0 0 0 1px rgb(66, 135, 175);
+          
+    }
+    .table-wrapper-scroll-y {
+        display: block;
+        }
+ .cont-consola{
+    border: 1px solid rgb(12, 12, 12);
+ }
+ 
+ .depos1{ 
+    font-family: 'Times New Roman', Times, serif;
+ }
+
+ .qmouse:hover{
+    text-decoration:none;
+    background-image: linear-gradient(to bottom, rgb(126 ,132, 138,0.4),rgba(208, 209, 210,0.1), #343a40, #343a40);
+
+    cursor: pointer; 
+ }
+ 
+
+ .iconfot{
+     text-decoration: none;
+
+ }

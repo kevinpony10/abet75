@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('header.ejs'); -%>
+    <title>Abet Skin | Consola</title>
+</head>
+<body>
+    <%- include('nav.ejs'); -%>
+   
+   <div class=" consola m-3" >
+     <div class="row m-2 ">
+        <div class=" col-12  text-center table-wrapper-scroll-y my-custom-scrollbar bg-light border border-info"
+        style=" height:550px; ">
+        <table class="table table-striped table-bordered table table-bordered table-striped mt-2 " id="table1">
+            <thead>
+                <tr class="thead-dark">
+                    <th id="lista"><i class="far fa-calendar-check"></i></th>
+                    <th>team-1</th>
+                    <th>team-2</th>
+                    <th>img-1</th>
+                    <th>img-2</th>
+                    <th>Game</th>
+                    <th>Time</th>
+                    <th>Torneo</th>
+                    <th>BO</th>
+                    <th>WIN</th>
+                </tr>
+            </thead>
+            <tbody id="tbody2">
+
+            </tbody>
+        </table>
+        </div>
+
+    </div>
+
+    
+       
+     
+
+     <div class="row justify-content-between m-2 " >
+        <div class=" col-md-5   text-center" style=" height:700px; " >
+            <div class="card m-1" >
+                <div class="card-body mt-2 ">
+                    <form action="">
+                        <input type="hidden" placeholder="nombre-items" class="form-control mb-3 text-info mt-2" id="id">
+                        <input type="text" placeholder="TEAM-1" class="form-control mb-3 mt-2" id="team1">
+                        <input type="text" placeholder="TEAM-2" class="form-control mb-3 mt-2" id="team2">
+                        <input type="text" placeholder="IMG-1" class="form-control mb-3 mt-2" id="img1">
+                        <input type="text" placeholder="IMG-2" class="form-control mb-3 mt-2" id="img2">
+                        
+                        <select class="form-control  mb-3" id="game">
+                            <option>Dota</option>
+                            <option>Csgo</option>
+                            <option>League</option>
+                            <option>Watch</option>
+                            <option>Hearth</option>
+                            <option>Sports</option>
+                            <option>Games</option>
+                        </select>
+                        <input type="text" placeholder="Time" class="form-control mb-3 mt-2" id="time">
+                        <input type="text" placeholder="Torneo" class="form-control mb-3 mt-2" id="torneo">
+
+                        <select class="form-control  mb-3" id="bo">
+                            <option>BO-1</option>
+                            <option>BO-2</option>
+                            <option>BO-3</option>
+                            <option>BO-5</option>
+                            <option>JACK</option>
+                        </select>
+                      
+                       <input type="text" placeholder="IMG-Torneo" class="form-control mb-3 mt-2" id="img3">
+                        
+                        <select class="form-control  mb-3" id="win">
+                            <option>Pendiente</option>
+                            <option>Finalizado</option>
+                        </select>
+                       
+
+                        <button class="btn btn-success btn-lg m-3" id="actualizar"><i class="fas fa-edit"></i></i></button>
+                        <button class="btn btn-danger btn-lg m-3" id="eliminar"><i class="far fa-trash-alt"></i></button>
+                        <button class="btn btn-secondary btn-lg m-3" id="mostrar"><i class="fas fa-list-alt"></i></button>
+                        <button class="btn btn-primary btn-lg m-3" id="limpiar"><i class="fas fa-broom"></i></button>
+
+                        <button class="btn btn-info btn-lg btn-block" id="agregar"><i class="fas fa-chess-king"></i> Ingresar Partida</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class=" col-md-6    text-center  "  >
+            <div class="row  ">
+                <div class="col-12 pb-4 pt-4">
+                    <div class="card m-1" >
+                        <div class="card-body mt-2 ">
+                            <form action="">
+                                <input type="hidden" placeholder="nombre-items" class="form-control mb-3 text-info mt-2" id="bets2">
+                                <input type="text" placeholder="Bet-ID" class="form-control mb-3 mt-2" id="id2">
+                                
+                                <select class="form-control  mb-3" id="tipo1">
+                                    <option>Global</option>
+                                    <option>Game-1</option>
+                                    <option>Game-2</option>
+                                    <option>Game-3</option>
+                                    <option>Game-4</option>
+                                    <option>Game-5</option>
+                                    <option>Vivo</option>
+                                </select>
+
+                                <select class="form-control  mb-3" id="estado1">
+                                    <option>Auto</option>
+                                    <option>Activo</option>
+                                    <option>Inactivo</option>  
+                                </select>
+                               
+        
+                                <button class="btn btn-success btn-lg m-3 " id="update"><i class="fas fa-edit"></i></i></button>
+                                <button class="btn btn-danger btn-lg m-3 " id="delete"><i class="fas fa-trash-alt"></i></i></button>
+                      
+        
+                                <button class="btn btn-primary btn-lg btn-block" id="insert"><i class="fas fa-chess-knight"></i> Ingresar Tipo</button>
+        
+                            </form>
+                        </div>
+                    </div> 
+                </div>
+
+
+                <div class="col-12 pb-4 pt-4">
+                    <div class="card m-1" >
+                        <div class="card-body mt-2 ">
+                            <form action="">
+                                <input type="text" placeholder="Bets-ID" class="form-control mb-3 mt-2" id="id3">
+                                
+                                <select class="form-control  mb-3" id="game1">
+                                    <option>Team-1</option>
+                                    <option>Team-2</option>
+                                    <option>Empate</option>
+                                    <option>Cancelado</option>
+                                    
+                                </select>
+                               
+                               
+        
+                                <button class="btn btn-dark  btn-lg btn-block text-light" id="terminar"><i class="fas fa-chess-knight"></i> Termindar Partida</button>
+        
+                            </form>
+                        </div>
+                    </div> 
+                </div>
+              </div>
+            
+        </div>
+        
+     </div>
+
+
+
+     <div class="row p-3 ">
+        <div class=" col-12  text-center table-wrapper-scroll-y my-custom-scrollbar bg-light border border-info"
+        style=" height:100%; ">
+        <table class="table table-striped table-bordered table table-bordered table-striped mt-2 " id="table2">
+            <thead>
+                <tr class="thead-dark">
+                    <th id="lista2"><i class="far fa-calendar-check"></i></th>
+                    <th>Bets</th>
+                    <th>Total-1</th>
+                    <th>Total-2</th>
+                    <th>Total</th>
+                    <th>Tipo</th>
+                    <th>Estado</th>
+                    <th>Ganador</th>
+                    
+                </tr>
+            </thead>
+            <tbody id="tbody3">
+
+            </tbody>
+        </table>
+        </div>
+
+    </div>
+           
+   </div>
+
+   <script>  $( document ).ready(function() {
+        //
+    $("#table1").on('click', '.cursor', function () {
+
+                     let row = $(this).closest('tr');
+                     let id = row.find('.id').text();
+                     let team1 = row.find('.team1').text();
+                     let team2 = row.find('.team2').text();
+                     let img1 = row.find('.img1').text();
+                     let img2 = row.find('.img2').text();
+                     let game= row.find('.game').text();
+                     let time = row.find('.time').text();
+                     let torneo = row.find('.torneo').text();
+                     let bo = row.find('.bo').text();
+                     let win = row.find('.win').text();
+                     $("#id").val(id);
+                     $("#bets2").val(id);
+                     $("#team1").val(team1);
+                     $("#team2").val(team2);
+                     $("#img1").val(img1);
+                     $("#img2").val(img2);
+                     $("#game").val(game);
+                     $("#time").val(time);
+                     $("#torneo").val(torneo);
+                     $("#bo").val(bo);
+                     $("#win").val(win);
+
+
+                 });
+
+    //
+    $("#lista").on('click',function(){
+        $.ajax({
+            url: "/consola-bets",
+            success: function (bets) {
+                              
+                let tbody = $('#tbody2');
+                tbody.html('');
+                bets.forEach(bet => {
+                    if (bet.win == "Finalizado") {
+                             var definir = `<td class="text-danger win">${bet.win}</td>`;
+                         } else {
+                             var definir = `<td class="text-success win">${bet.win}</td>`;
+
+                         }
+
+                    tbody.append(`
+                    <tr class="cursor tj2" >
+                            <td class=" id " >${bet.bets}</td>  
+                            <td class="team1" >${bet.team1}</td>
+                            <td class="team2">${bet.team2}</td>
+                            <td class="img1 jt">${bet.img1}</td>
+                            <td class="img2 jt">${bet.img2}</td>
+                            <td class="game text-primary">${bet.game}</td>
+                            <td class="time jt">${bet.time}</td>
+                            <td class="torneo text-primary jt">${bet.torneo}</td>
+                            <td class="bo ">${bet.bo}</td>
+                            ${definir}
+                      
+                          </tr>
+                                  
+                      `)
+                }); 
+            }
+        })
+    })
+    $("#lista").click();
+   
+    $("#mostrar").on('click',function(e){
+    e.preventDefault();
+    let id = $('#id').val();
+    $.ajax({
+                 url: 'tipo/' + id,
+                 method: 'GET',
+                 success: function (bets) {
+                    let tbody = $('#tbody3');
+                     tbody.html('');
+                     bets.forEach(bet => {
+                        if (bet.estado == "Inactivo") {
+                             var definir = `<td class="text-danger">${bet.estado}</td>`;
+                         } else {
+                             var definir = `<td class="text-success">${bet.estado}</td>`;
+
+                         }
+                         tbody.append(`
+                    <tr class="cursor" >
+                            <td class="id2" >${bet.id}</td>  
+                            <td class="bet text-primary" >${bet.bets_id}</td>
+                            <td class="total1">${bet.total1}</td>
+                            <td class="total2" >${bet.total2}</td>
+                            <td class="total text-success">${bet.total}</td>
+                            <td class="tipo ">${bet.tipo}</td>     
+                            ${definir}
+                            <td class="ganador ">${bet.gameWin}</td>
+                          </tr>
+                                  
+                      `)
+                     }); 
+                 }
+    })
+    })
+
+
+    $("#limpiar").on('click',function(e){
+    e.preventDefault();
+    $("#id").val("");
+    $("#img1").val("");
+    $("#img2").val("");
+    $("#team1").val("");
+    $("#team2").val("");
+    $("#game").val("");
+    $("#time").val("");
+    $("#torneo").val("");
+    $("#bo").val("");
+    $("#win").val("");
+})
+
+    $("#agregar").on('click',function(e){
+        e.preventDefault();
+        let team1= $('#team1').val();
+        let team2= $('#team2').val();
+        let img1= $('#img1').val();
+        let img2= $('#img2').val();
+        let img3= $('#img3').val();
+        let game= $('#game').val();
+        let time= $('#time').val();
+        let torneo= $('#torneo').val();
+        let bo= $('#bo').val();
+        let win= $('#win').val();
+      
+        $.ajax({
+            url:'/agregar',
+            method:'POST',
+            data:{
+                team1:team1,
+                team2:team2,
+                img1:img1,
+                img2:img2,
+                img3:img3,
+                game:game,
+                time:time,
+                torneo:torneo,
+                bo:bo,
+                win:win
+            },
+            success: function(response){
+                $("#lista").click();
+             
+               alertas(response);
+            }
+        })
+    });
+
+
+    $("#eliminar").on('click',function(e){
+        let newID = $('#id').val();
+        e.preventDefault();
+        $.ajax({
+            url:'/eliminar',
+            method:'POST',
+            data:{
+                id:newID
+            },
+            success: function(response){
+                $("#lista").click();
+                alertas(response);
+               
+            }
+        })
+    });
+
+    $("#actualizar").on('click',function(e){
+        let id = $('#id').val();
+        let team1 = $('#team1').val();
+        let team2 = $('#team2').val();
+        let img1 = $('#img1').val();
+        let img2 = $('#img2').val();
+        let img3= $('#img3').val();
+        let bo = $('#bo').val();
+        let win = $('#win').val();
+        let game= $('#game').val();
+        let time= $('#time').val();
+        let torneo= $('#torneo').val();
+      
+        e.preventDefault();
+        $.ajax({
+            url:'/actualizar',
+            method:'POST',
+            data:{
+                team1:team1,
+                team2:team2,
+                img1:img1,
+                img2:img2,
+                img3:img3,
+                game:game,
+                time:time,
+                torneo:torneo,
+                bo:bo,
+                win:win,
+                id:id
+            },
+            success: function(response){
+                $("#lista").click();
+                alertas(response);
+               
+            }
+        })
+       
+       
+    });
+
+   //
+   $("#table2").on('click', '.cursor', function () {
+       
+     let row = $(this).closest('tr');
+     let id = row.find('.id2').text();
+    
+    
+       $("#id2").val(id);
+       $("#id3").val(id);
+   })
+
+   $("#insert").on('click',function(e){
+       e.preventDefault();
+   
+       let bet = $('#bets2').val();
+       let tipo = $('#tipo1').val();
+       let estado = $('#estado1').val();
+      
+       $.ajax({
+           url: '/insertar',
+           method: 'POST',
+           data: {
+               bet: bet,
+               tipo: tipo,
+               estado: estado
+           },
+           success: function (response) {
+            $("#mostrar").click();
+
+               alertas(response);
+           }
+       })
+      
+   })
+
+   $("#update").on('click',function(e){
+        let id = $('#id2').val();
+        let tipo = $('#tipo1').val();
+        let estado = $('#estado1').val();
+ 
+        e.preventDefault();
+        $.ajax({
+           url: '/update',
+           method: 'POST',
+           data: {
+               id: id,
+               tipo: tipo,
+               estado: estado,
+           },
+           success: function (response) {
+               $("#mostrar").click();
+               alertas(response);
+
+           }
+       })
+       
+       
+    });
+
+    $("#terminar").on('click',function(e){
+        let id = $('#id3').val();
+        let game = $('#game1').val();
+       
+        e.preventDefault();
+        $.ajax({
+           url: '/terminar',
+           method: 'POST',
+           data: {
+               id: id,
+               game: game
+           },
+           success: function (response) {
+               $("#mostrar").click();
+               alertas(response);
+
+           }
+       })
+    })
+
+    $("#delete").on('click',function(e){
+        let newID = $('#id2').val();
+        e.preventDefault();
+        $.ajax({
+            url:'/delete',
+            method:'POST',
+            data:{
+                id:newID
+            },
+            success: function(response){
+                $("#mostrar").click();
+                alertas(response);
+               
+            }
+        })
+    });
+})
+
+
+function alertas(response){
+     
+     const Toast = Swal.mixin({
+         toast: true,
+         position: 'top-end',
+         showConfirmButton: false,
+         timer: 3000,
+         timerProgressBar: true,
+         onOpen: (toast) => {
+           toast.addEventListener('mouseenter', Swal.stopTimer)
+           toast.addEventListener('mouseleave', Swal.resumeTimer)
+         }
+       })
+       
+       Toast.fire({
+         icon: response.succes,
+         title: response.estado
+       })
+ }
+
+   </script>
+   <%- include('scripts.ejs'); -%>
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> 
+   
+    
+</body>
+<%- include('footer.ejs'); -%>
+</html>

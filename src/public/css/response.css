@@ -1,0 +1,33 @@
+
+@media screen and (max-width: 500px){
+    p{
+     
+       text-align: center;
+     font-size:12px;
+     
+     }
+     .del{
+       cursor: pointer;
+       border-radius: 0px 200px 200px 0px;
+       -moz-border-radius: 0px 200px 200px 0px;
+       -webkit-border-radius: 0px 200px 200px 0px;
+   }
+
+   .der1{
+    width: 20%;
+    
+   }
+    
+  
+   
+    }
+    @media screen and (max-width: 450px){
+      .bodyres{
+        width: 500px;
+        background: #4B79A1;  /* fallback for old browsers */
+       
+      }
+      .cardper{
+        width: 9rem;
+      }
+    }

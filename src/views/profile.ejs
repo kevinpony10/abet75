@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('header.ejs'); -%>
+      <title>Abet Skin | Profile</title>
+</head>
+<body>
+    <%- include('nav.ejs'); -%>
+
+ 
+      
+    
+        <div class="row m-2 mt-4">
+            <div class="col-sm-9 ph ">
+                <div class="row">
+                    <div class="col-12 color  m-1 mb-2 ph2 bord "   >
+                      <h6 class="text-light text-center mt-2">ACTIVE BETS</h6>
+                      <div class="row m-1 mt-3  justify-content-start "  >
+                        <%if(user===""){%>
+                          <div class="card bg-dark  skin text-light cardper mr-4 mt-1 ml-4 col4">
+                          
+                            <div class=" imgfront img-fluid rounded mx-auto d-block " style="background-image: url(img/gris.jpg); width: 5rem; ">
+                            </div>
+                          
+                            <div class="card-body text-center">
+                              <h6 class="card-title platabord textjust">Inicia Sesión</h6>
+                              <span class="badge badge-secondary badge-pill">
+                                <img src="/icon/gem.svg" alt="" style="width: 14px;" class="img-fluid rounded mx-auto ">
+                                5.00</span>
+                              <h6 class="enc mt-2">13/12/2020 - Dota</h6>
+                              <small class="col  text-light  badge stylver">Profit: <img src="/icon/gem.svg" alt="" style="width: 14px;"
+                                class="img-fluid rounded mx-auto ">
+                              10.00</small>
+                            </div>
+                             
+                           
+                          
+                          </div>
+                          <%}else{%>   
+                            <%if(his.length<=0){%>
+                              <div class="card bg-dark skin text-light cardper mr-4 mt-1 ml-4 col4" >
+                               
+                                <div class=" imgfront img-fluid rounded mx-auto d-block " style="background-image: url(img/gris.jpg); width: 5rem; ">
+                                </div>
+                              
+                                <div class="card-body text-center">
+                                  <h6 class="card-title platabord textjust">No tienes Historial</h6>
+                                  <span class="badge badge-secondary badge-pill">
+                                    <img src="/icon/gem.svg" alt="" style="width: 14px;" class="img-fluid rounded mx-auto ">
+                                    00.00</span>
+                                  <h6 class="enc mt-2">01/01/2021 - CSGO</h6>
+                                  <small class="col  text-light  badge stylver">Profit: <img src="/icon/gem.svg" alt="" style="width: 14px;"
+                                    class="img-fluid rounded mx-auto ">
+                                  00.00</small>
+                              
+                                </div>
+                                 
+                              
+                         </div>
+                              
+                              <%}%>
+
+
+
+                            <% his.forEach(function(hi){ %>
+
+                              
+                            <%if(hi.win==="team"){%>
+                            <div class="card bg-dark skin text-light cardper mr-4 mt-1 ml-4 col4">
+                              <div class=" imgfront img-fluid rounded mx-auto d-block " style="background-image: url(<%-hi.img%>); width: 5rem; ">
+                              </div>
+                            
+                              <div class="card-body text-center">
+                                <h6 class="card-title platabord textjust"><%-hi.team%></h6>
+                                <span class="badge badge-secondary badge-pill">
+                                  <img src="/icon/gem.svg" alt="" style="width: 14px;" class="img-fluid rounded mx-auto ">
+                                  <%-hi.apuesta%></span>
+                                  <h6 class="enc mt-2"><%-hi.newtime%> - <%-hi.game%></h6>
+                                  <small class="col  text-light  badge stylver mt-2">Profit: <img src="/icon/gem.svg" alt="" style="width: 14px;"
+                                    class="img-fluid rounded mx-auto ">
+                                  <%-hi.t%></small>
+                              </div>
+                            </div>
+                             
+                            <%}else{%><%}%>
+                                                      <%})%>;
+                          <%}%>
+                       </div>
+                    </div>
+
+                    <div class="col-12 color  m-1 mb-2 ph2 bord" >
+                      <h6 class="text-light text-center mt-2">LAST BETS</h6>
+                      <div class="row m-1 mt-3  justify-content-start "  >
+                       <%if(user===""){%>
+
+                         <div class="card bg-dark skin text-light cardper mr-4 mt-1 ml-4 col4" >
+                             
+                                <div class=" imgfront img-fluid rounded mx-auto d-block " style="background-image: url(img/gris.jpg); width: 5rem; ">
+                                </div>
+                              
+                                <div class="card-body text-center">
+                                  <h6 class="card-title platabord textjust">Inicia Sesión</h6>
+                                  <span class="badge badge-secondary badge-pill">
+                                    <img src="/icon/gem.svg" alt="" style="width: 14px;" class="img-fluid rounded mx-auto ">
+                                    15.00</span>
+                                  <h6 class="enc mt-2">13/12/2020 - CSGO</h6>
+                                  <small class="col  text-light  badge stylver">Profit: <img src="/icon/gem.svg" alt="" style="width: 14px;"
+                                    class="img-fluid rounded mx-auto ">
+                                  25.00</small>
+                              
+                                </div>
+                                 
+                              
+                         </div>
+                         <%}else{%> 
+                          <%if(his.length<=0){%>
+                            <div class="card bg-dark skin text-light cardper mr-4 mt-1 ml-4 col4" >
+                             
+                              <div class=" imgfront img-fluid rounded mx-auto d-block " style="background-image: url(img/gris.jpg); width: 5rem; ">
+                              </div>
+                            
+                              <div class="card-body text-center">
+                                <h6 class="card-title platabord textjust">No tienes Historial</h6>
+                                <span class="badge badge-secondary badge-pill">
+                                  <img src="/icon/gem.svg" alt="" style="width: 14px;" class="img-fluid rounded mx-auto ">
+                                  00.00</span>
+                                <h6 class="enc mt-2">01/01/2021 - CSGO</h6>
+                                <small class="col  text-light  badge stylver">Profit: <img src="/icon/gem.svg" alt="" style="width: 14px;"
+                                  class="img-fluid rounded mx-auto ">
+                                00.00</small>
+                            
+                              </div>
+                               
+                            
+                       </div>
+                            
+                            <%}%>
+                           
+                           <% his.forEach(function(hi){ %>
+                           <%if(hi.win==="team"){%>
+
+                           <%}else{%>
+                            
+                            <div class="card bg-dark skin text-light cardper mr-4 mt-1 ml-4 col4">
+                              <div class=" imgfront img-fluid rounded mx-auto d-block " style="background-image: url(<%-hi.img%>); width: 5rem; ">
+                              </div>
+                            
+                              <div class="card-body text-center">
+                                <h6 class="card-title platabord textjust"><%-hi.team%></h6>
+                                <span class="badge badge-secondary badge-pill">
+                                  <img src="/icon/gem.svg" alt="" style="width: 14px;" class="img-fluid rounded mx-auto ">
+                                  <%-hi.apuesta%></span>
+                                <h6 class="enc mt-2"><%-hi.newtime%> - <%-hi.game%></h6>
+                                <%if(hi.win==="Team-1"){%>
+                                  <%if(hi.equipo==="t"){%>
+                                  <small class="col  text-light  badge stylver">Profit: <img src="/icon/gem.svg" alt="" style="width: 14px;"
+                                      class="img-fluid rounded mx-auto ">
+                                    <%-hi.t%></small>
+                                  <%}else{%>
+                                    <small class="col  text-light  badge bg-danger">Loss: <img src="/icon/gem.svg" alt="" style="width: 14px;"
+                                      class="img-fluid rounded mx-auto ">
+                                    <%-hi.apuesta%></small>
+                                  <%}%> 
+                                <%}else if(hi.win==="Team-2"){%> 
+                                
+                        
+                                  <%if(hi.equipo==="e"){%>
+                                  <small class="col  text-light  badge stylver">Profit: <img src="/icon/gem.svg" alt="" style="width: 14px;"
+                                      class="img-fluid rounded mx-auto ">
+                                    <%-hi.t%></small>
+                                  <%}else{%>
+                                    <small class="col  text-light  badge bg-danger">Loss: <img src="/icon/gem.svg" alt="" style="width: 14px;"
+                                      class="img-fluid rounded mx-auto ">
+                                    <%-hi.apuesta%></small>
+                                  <%}%> 
+                                <%}else{%>  
+
+                                  <%if(hi.win==="Empate"){%>
+                                  <small class="col  text-ligth   badge bg-danger">Empate: <img src="/icon/gem.svg" alt="" style="width: 14px;"
+                                      class="img-fluid rounded mx-auto ">
+                                    <%-hi.apuesta%></small>
+                                  <%}else{%>
+                                    <small class="col  text-dark  badge bg-warning">Cancelado: <img src="/icon/gem.svg" alt="" style="width: 14px;"
+                                      class="img-fluid rounded mx-auto ">
+                                    <%-hi.apuesta%></small>
+                                  <%}%> 
+                                <%}%>  
+                              </div>
+                             
+                              
+                            </div>
+                            <%}%>
+                                                     <% }); %>
+                        
+                         <%}%>
+
+                      </div>
+                   </div>
+                   
+                </div>
+            </div>
+            
+            <div class="col-sm-3 "> 
+                <div class="col-12 color ph bord " >
+                  
+                  <div class="row justify-content-center">
+                    <%if(user===""){%>
+                      <div class="card bg-dark bord text-light cardper2  mt-4 mb-3 imgfron "style="background-image: url(/img/dig.png);  background-size: 100% 100%;" >
+                          
+                      </div>
+                      <%}else{%> 
+                    <div class="card bg-dark  text-light cardper2  mt-4 mb-3 imgfron "style="background-image: url(<%-user.avatarfull-%>);  background-size: 100% 100%;" >
+                          
+                    </div>
+                    <%}%>
+                    <div class="col-11 mt-4 platabord ">
+                      <div class="row text-light">
+                        <div class="col-4 align-self-start ">
+                          Profile
+                        </div>
+                        
+                        <div class="col-8 align-self-end mt-4 textjust">
+                          <%if(user===""){%>
+                            ------------------
+                            <%}else{%> 
+                              <i class="far fa-calendar-check text-success"></i>   <%= user.personaname%>
+                          <%}%>
+                        </div>
+                        
+                      </div>
+                    </div>
+
+                    <div class="col-11 mt-4 platabord ">
+                      <div class="row text-light">
+                        <div class="col-4 align-self-start ">
+                          URL
+                        </div>
+                        
+                        <div class="col-8 align-self-end mt-4 textjust">
+                          <%if(user===""){%>
+                            ------------------
+                            <%}else{%>
+                              <%if(saldo.url===""){%> 
+                                <i class="far fa-calendar-times text-danger"></i>   ------------------
+                                <%}else{%>
+                              <i class="far fa-calendar-check text-success"></i>   <%= saldo.url%>
+                                <%}%>
+                            <%}%>
+                        </div>
+                        
+                      </div>
+                    </div>
+
+                    <div class="col-11 mt-4 platabord ">
+                      <div class="row text-light">
+                        <div class="col-4 align-self-start ">
+                          Referred
+                        </div>
+                        
+                        <div class="col-8 align-self-end mt-4 textjust">
+                          <%if(user===""){%>
+                            ------------------
+                            <%}else{%> 
+                              <%if(saldo.code===""){%> 
+                                <i class="far fa-calendar-times text-danger"></i>   ------------------
+                                <%}else{%>
+                              <i class="far fa-calendar-check text-success"></i>   <%= saldo.code%>
+                                <%}%>
+                          <%}%>
+                        </div>
+                        
+                      </div>
+                    </div>
+
+                    <div class="col-11 mt-4 platabord ">
+                      <div class="row text-light">
+                        <div class="col-4 align-self-start ">
+                          Promotional Name
+                        </div>
+                        
+                        <div class="col-8 align-self-end mt-4 textjust">
+                          <%if(user===""){%>
+                            ------------------
+                            <%}else{%>
+                              <%if(saldo.prom==="off"){%> 
+                                <i class="far fa-calendar-times text-danger"></i>   ------------------
+                                <%}else{%>
+                              <i class="far fa-calendar-check text-success"></i>   <%= saldo.prom%>
+                                <%}%>
+                            <%}%>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+            </div>
+        </div>
+ 
+
+    <%- include('scripts.ejs'); -%>
+</body>
+    <%- include('footer.ejs'); -%>
+</html>

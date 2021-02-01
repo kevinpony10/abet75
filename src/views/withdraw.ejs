@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('header.ejs'); -%>
+   
+    <title>Abet Skin | Withdraw</title>
+</head>
+<body>
+    <%- include('nav.ejs'); -%>
+   
+
+    <div class="row text-light justify-content-between m-2 ">
+        <div class="col-sm-9  mb-2 mt-2 ">
+            <div class="col-12 color bord scrol devitems divhei ">
+                <h6 class="text-center mt-1">Dota 2</h6>
+                <div class=" itmes ml-3 scrol row justify-content-start " id="items">
+               
+
+                    <% items.forEach(function(item,i){ %>
+                
+                
+                    <div class=" bg-dark  mt-2 mb-2 mr-2  rounded-lg badge badge-primary text-break skin bordbo" id="<%=i%>" 
+                        style="width:122px ;height: 145px; background-color: #34454C;" data-toggle="tooltip" data-placement="top" title="<%= item.name %>">
+                        <p class=" kr "><%= item.name %></p>
+                
+                        <input name="<%= item.name %>" type="hidden" value="<%= item.assetid %>">
+                
+                
+                        <img src="http://steamcommunity-a.akamaihd.net/economy/image/<%= item.img %>" alt="" width='100%' height='100%'
+                            class="mb-3  rounded-lg img-fluid rounded mx-auto ">
+                        <span style="height: 15px;" class="bg-dark pt-3">
+                            <p class="text-center" style="height: 5px;"><img src="/icon/gem.svg" alt="" style="width: 15px;"
+                                    class="img-fluid rounded mx-auto ">
+                                <%= item.retiro %>
+                            </p>
+                        </span>
+                
+                    </div>
+                
+                    <%})%>
+                  
+             </div>                                        
+            </div>
+        </div>
+        <div class="col-sm-3 mt-2 ">
+            <div class="col-12 color bord divhei">
+                <div class="divskin2 ml-2">
+                    <form id="windraw" action="/windraw" method="POST" style="background-color: #232C31; height: 100%;">
+                        <div class="pt-3"></div>
+                        <h6 class="text-center ">Total Depositar</h6>
+                        <div class="pt-2"></div>
+                        <div id="items2" class="text-light  platabord  mt-3 " style="width: 100%; height: 66%; overflow-y: scroll; ">
+                        </div>
+                    
+                        <%if(user===""){%>
+                            <div class="mt-3  text-center " >Inicia sesión para depositar </div>
+                                
+                                <%}else{%>
+                            <div class="mt-3 text-center " >Configurar URl de Intercambio <a href="" id="url"><i class="fas fa-cog text-secondary"></i></a> </div>
+                            <%}%>
+                        <div class=" bg-dark mt-3 text-light rounded-lg" style="width: 100%; height: 10%;">
+                            <button class="btn  btn-lg btn-block text-light" type="submit" onclick="getFormData('windraw');"
+                            style="background-color:#2A8EBD ;">Withdraw</button>
+                        </div>
+                
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <%if(user===""){%> <%}else{%>
+
+        <script>
+            
+               $(document).ready(function () {
+          
+             
+
+               $(`#url`).on('click',async function (e) {
+                     e.preventDefault();
+                      
+                      Swal.fire({
+                         html: '<strong class="text-light platabord"><a href="https://steamcommunity.com/profiles/<%= user.steamid%>/tradeoffers/privacy#trade_offer_access_url" target="_blank">URL</a>de intercambio steam</strong>',
+                         input: 'url',
+                         background: "#343A40",
+                         inputPlaceholder:"https://steamcommunity.com/tradeoffer/new/?partner=1022713549&token=3zVL1W",
+                         showCancelButton: true,
+                         confirmButtonText: '<i class="far fa-edit"></i> Save',
+                         cancelButtonText: '<i class="fas fa-ban"></i> Cancel',
+                         denyButtonText: `Don't save`,
+                         customClass: {
+                         input: "text-light ",
+                         }}).then((result) => {
+                             if (result.isConfirmed) {
+                               $.ajax({
+                               url: '/url',
+                               method: 'POST',
+                               data: {
+                               url: result.value,
+                               },success: function (response) {
+                                   Swal.fire({title:`${response.estado}`,  showConfirmButton: false, toast: true, icon:'success',background:"#343A40",timer: 3000,  customClass: { title: "text-light"}})
+
+                              }
+                         })
+                       } 
+                     })
+                  })
+
+            })
+        </script>
+        <%}%>
+    <script>
+        $(document).ready(function () {
+            $(`#items`).on('click', 'div', function () {
+                $(this).appendTo('#items2');
+
+            })
+
+            $(`#items2`).on('click', 'div', function () {
+                        $(this).prependTo('#items');
+                      
+                        var mylist = $('#items');
+                        var  id = $('#items> div').toArray().sort( function(a,b) { a.id - b.id } );
+                        
+                       
+                       id.sort(function (a, b) {
+                            return a.id - b.id;
+                        })
+                        $.each(id, function (idx, itm) { mylist.append(itm); });
+
+                    })
+
+            $(`#organizar`).on('click', () => {
+                var mylist = $('#items');
+                var listitems = mylist.children('div').get();
+                alert("funcionakevin")
+                listitems.sort(function (a, b) {
+                    var compA = $(a).text().toUpperCase();
+                    var compB = $(b).text().toUpperCase();
+                    return (compB < compA) ? -1 : (compB > compA) ? 1 : 0;
+                })
+                $.each(listitems, function (idx, itm) { mylist.append(itm); });
+
+            })
+
+            $(`#windraw`).on('submit', function (e) {
+                  e.preventDefault();
+                  var items=($('#windraw').serializeArray());
+                  var message=[];
+                  for (let index = 0; index < items.length; index++) {
+                    message.push({
+                    name:items[index].name,
+                    assetid: items[index].value
+                    });
+                  }
+                Swal.fire({
+                    title: 'Creando Oferta',
+                    html: `<div class="spinner-border text-info mt-4 mb-4" style="width: 3rem; height: 3rem;" role="status">
+                            <span class="sr-only" >Loading...</span>
+                            </div>`,
+                            footer:'<h5 class="text-light">Espera un Momento ... !!</h5>',
+                    background: "#343A40",
+                    showConfirmButton: false,
+                        customClass: {
+                            title: "text-light"
+                        },
+                    timer: 2500,
+                    }).then(() => {
+                        $.ajax({
+                            url: '/windraw',
+                            method:'POST',
+                            contentType: "application/json", 
+                            data:JSON.stringify(message),
+                    
+                            success:function(response) { 
+                            alertas(response);
+                            }
+                        })
+            })        
+    })
+
+       
+                 function alertas(response) {
+                    Swal.fire({
+                        icon: response.succes,
+                        title: response.estado,
+                        background: "#343A40",
+                        timer: 3000,
+                        showConfirmButton: false,
+                        customClass: {
+                            title: "text-light"
+                        }
+                    })}
+        });
+
+    </script>
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> 
+    <%- include('scripts.ejs'); -%>
+
+</body>
+    <%- include('footer.ejs'); -%>
+</html>

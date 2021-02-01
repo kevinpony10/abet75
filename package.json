@@ -1,0 +1,33 @@
+{
+  "name": "abetskin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+   "main": "index.js",
+  "scripts": {
+    "start": "node src",
+    "dev": "nodemon src",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "ejs": "^3.1.2",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "node-time-ago": "^1.0.0",
+    "passport": "^0.4.1",
+    "passport-steam": "^1.0.14",
+    "socket.io": "^2.3.0",
+    "steam-community": "^0.2.2",
+    "steam-totp": "^2.1.1",
+    "steam-tradeoffer-manager": "^2.10.1",
+    "steam-user": "^4.15.1"
+  }
+
+}

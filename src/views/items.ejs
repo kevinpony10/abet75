@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('header.ejs'); -%>
+    <title>Abet Skin | Items-consola</title>
+</head>
+<body>
+    <%- include('nav.ejs'); -%>
+    
+    <div class=" consola " >
+        <div class="row align-items-center pl-3" ">
+            <div class=" col-md-7 bg-light mr-3 mt-3 ml-3 text-center table-wrapper-scroll-y my-custom-scrollbar"
+               style=" height:432px; ">
+                
+                  
+               <table class="table table-striped table-bordered table table-bordered table-striped mt-2 border border-dark" id="table1">
+                   <thead>
+                       <tr class="thead-dark">
+                           <th id="lista"><i class="far fa-calendar-check"></i></th>
+                           <th>Item nombre</th>
+                           <th>Estado</th>
+                           <th>Deposito</th>
+                           <th>P%</th>
+                           <th>Retiro</th>
+                           <th>Ganacia</th>
+                           <th>Game</th>
+                       </tr>
+                   </thead>
+                   <tbody id="tbody2">
+   
+                   </tbody>
+               </table>
+           </div>
+           
+           <div class=" col-md-4 bg-light mr-3 mt-3 ml-3 text-center">
+               <div class="card mt-2 mb-2">
+                   <div class="card-body ">
+                       <form action="">
+                           <input type="hidden" placeholder="nombre-items" class="form-control mb-3 text-info" id="id">
+                           <input type="text" placeholder="Nombre-item" class="form-control mb-3" id="nombre">
+   
+                           <select class="form-control  mb-3" id="estado">
+                               <option>Activo</option>
+                               <option>Inactivo</option>
+                           </select>
+   
+                           <select class="form-control  mb-3" id="porcentaje">
+                               <option>5%</option>
+                               <option>7%</option>
+                               <option>10%</option>
+                               <option>15%</option>
+                           </select>
+                           <select class="form-control  mb-3" id="game">
+                            <option>Dota 2</option>
+                            <option>Csgo</option>
+                        </select>
+                        <input type="text" placeholder="Deposito" class="form-control mb-3" id="deposito">
+
+                           <button class="btn btn-success mt-2 mb-2 mr-3 ml-3" id="actualizar"><i class="fas fa-edit"></i></i></button>
+                           <button class="btn btn-danger mt-2 mb-2  mr-3 ml-3" id="eliminar"><i class="far fa-trash-alt"></i></button>
+                           <button class="btn btn-primary mt-2 mb-2 mr-3 ml-3" id="limpiar"><i class="fas fa-broom"></i></button>
+   
+                           <button class="btn btn-info btn-lg btn-block" id="agregar"><i class="fas fa-dragon"></i> Ingresar Item</button>
+   
+                       </form>
+                   </div>
+               </div>
+           </div>
+       
+       
+   
+      
+   </div>
+   
+   <div class="row align-items-center pl-3 mb-3 mt-3" >
+     
+      <div class=" col-md-4 bg-light mr-3 mt-3 ml-3  text-center">
+        <div class="card mt-2 mb-2  border border-secondary">
+            <div class="card-body ">
+                <form action="">
+                 <input type="text" placeholder="busqueda-items" class="form-control mb-3 text-info" id="buscar">
+                    <button class="btn btn-success btn-sm btn-block" id="busqueda"><i class="fas fa-search"></i> Buscar Item</button>
+                </form>
+            </div>
+        </div>
+
+          <div class="card mt-2 mb-2">
+              <div class="card-body border border-secondary">
+                  <form action="">
+                   <input type="hidden" placeholder="nombre-items" class="form-control mb-3 text-info" id="idItem">
+   
+                      <input type="hidden" placeholder="nombre-items" class="form-control mb-3 text-info" id="id2">
+                      <input type="text" placeholder="Nombre-item" class="form-control mb-3" id="nombre2">
+   
+                    
+   
+                      <select class="form-control  mb-3" id="pv2">
+                          <option>Steam</option>
+                          <option>Dmarket</option>
+                          <option>Gamdom</option>
+                          <option>Games&Bets</option>
+                      </select>
+                      <input type="text" placeholder="Precio-Venta" class="form-control mb-3" id="venta2">
+                      <button class="btn btn-success mt-2 mb-2 mr-3 ml-3" id="actualizar2"><i class="fas fa-edit"></i></button>
+                      <button class="btn btn-danger mt-2 mb-2  mr-3 ml-3" id="eliminar2"><i class="far fa-trash-alt"></i></button>
+                    
+   
+                      <button class="btn btn-info btn-lg btn-block" id="ingresar2"><i class="fas fa-chess-rook"></i> Ingresar Item</button>
+   
+                  </form>
+              </div>
+          </div>
+      </div>
+   
+   
+      <div class=" col-md-7 bg-light mr-3 mt-3 ml-3 text-center table-wrapper-scroll-y my-custom-scrollbar"
+      style=" height:432px; ">
+      <div id="profit"></div>
+      <table class="table table-striped table-bordered table table-bordered table-striped mt-2 border border-dark" id="table2">
+          <thead>
+              <tr class="thead-dark">
+                  <th id="lista"><i class="far fa-calendar-check"></i></th>
+                
+                  <th>Item nombre</th>
+                  <th>D & R</th>
+                  <th>Precio</th>
+                 
+              </tr>
+          </thead>
+          <tbody id="tbody3">
+   
+          </tbody>
+      </table>
+   </div>
+   
+   
+   </div>
+
+   <div class="col-sm-7 bg-light ml-4">
+    <div class="card-body border">
+        <form action="">
+         <input type="text" placeholder="bet-Jacpot-total" class="form-control mb-3 text-info" id="saldo">
+         <input type="text" placeholder="bet-Jacpot-Personaname" class="form-control mb-3 text-info" id="personaname">
+           <input type="text" placeholder="bet-Jacpot-imagen" class="form-control mb-3 text-info" id="imgurl">
+            <select class="form-control  mb-3" id="ids">
+                <option>76561198169833435</option>
+                <option>76561199018657715</option>
+                <option>76561199091587109</option>
+                <option>76561199104716471</option>
+            </select>
+          
+
+            <button class="btn btn-info btn-lg btn-block" id="jacpotid"><i class="fas fa-chess-rook"></i> Ingresar Item</button>
+
+        </form>
+    </div>
+   </div>
+
+      </div>
+
+
+      <script>
+            $(document).ready(function () {
+        $("#table1").on('click', '.cursor', function () {
+
+                    let row = $(this).closest('tr');
+                    let id = row.find('.id').text();
+                    let items = row.find('.item').text();
+                    let estado = row.find('.estado').text();
+                    let deposito = row.find('.deposito').text();
+                    let porcentaje= row.find('.porcentaje').text();
+                    let game = row.find('.game').text();
+                  
+                    $("#id").val(id);
+                    $("#nombre").val(items);
+                    $("#estado").val(estado);
+                    $("#deposito").val(deposito);
+                    $("#porcentaje").val(porcentaje);
+                    $("#game").val(game);
+                });
+
+               
+               
+                $("#busqueda").on('click', function (e) {
+                    e.preventDefault();
+                    resultado =false;
+                     let buscar = $("#buscar").prop("value");
+                     
+                     $.ajax({
+                        url: "/itemsBusqueda",
+                        method: 'POST',
+                        data: {
+                          
+                            buscar: buscar
+                        },
+                        success: function (products) {
+                          
+                      
+                            let tbody = $('#tbody2');
+                            tbody.html('');
+                            products.forEach(product => {
+                                var suma = product.retiro - product.deposito;
+                                var ganancia = suma.toFixed(2);
+                                var deposit = product.deposito.toFixed(2);
+                                var retiro = product.retiro.toFixed(2);
+                                tbody.append(`
+                                   <tr class="cursor" >
+                                       <td class=" id" >${product.id}</td>  
+                                       <td class="item" >${product.item}</td>
+                                       <td class="text-success estado">${product.estado}</td>
+                                       <td class="text-primary deposito">${deposit}</td>
+                                       <td class="text-danger porcentaje">${product.porcentaje}</td>
+                                        <td class="text-primary">${retiro}</td>    
+                                       <td class="text-success venta">${ganancia}</td>
+                                       <td class="text-primary venta game">${product.juego}</td>
+                                </tr>`)
+                            })
+                        }
+                    })
+                    
+                })
+
+
+        $("#lista").on('click',function(){
+            $.ajax({
+                url: "/itemsList",
+                success: function (products) {
+                    let tbody = $('#tbody2');
+                    tbody.html('');
+                    products.forEach(product => {
+                        var suma =product.retiro -product.deposito;
+                        var ganancia = suma.toFixed(2);
+                        var deposit=product.deposito.toFixed(2);
+                        var retiro=product.retiro.toFixed(2);
+                        tbody.append(`
+                        <tr class="cursor" >
+                            <td class=" id" >${product.id}</td>  
+                            <td class="item" >${product.item}</td>
+                            <td class="text-success estado">${product.estado}</td>
+                            <td class="text-primary deposito">${deposit}</td>
+                            <td class="text-danger porcentaje">${product.porcentaje}</td>
+                            <td class="text-primary">${retiro}</td>    
+                            <td class="text-success venta">${ganancia}</td>
+                            <td class="text-primary venta game">${product.juego}</td>
+                        </tr>`)
+                    })
+                }
+            })
+            $.ajax({
+                url: "/itemsDeposit",
+                success: function (products) {
+                    
+                    let tbody = $('#tbody3');
+                    tbody.html('');
+                    products.forEach(product => {
+                      
+                        var retiro=product.precio.toFixed(2);
+                        tbody.append(`
+                        <tr class="cursor" >
+                            <td class=" id" >${product.id}</td> 
+                        
+                            <td class="item" >${product.item}</td>
+                            <td class="text-success estado">${product.estado}</td>
+                            <td class="text-success estado">${retiro}</td>
+                        </tr>`)
+                    })
+                }
+            })
+
+
+        })
+
+
+
+        $("#lista").click();
+
+     
+
+                $("#limpiar").on('click', function (e) {
+                    e.preventDefault();
+                    $("#id").val("");
+                    $("#nombre").val("");
+                    $("#estado").val("");
+                    $("#deposito").val("");
+                    $("#porcentaje").val("");
+                    $("#game").val("");
+                })
+
+
+                $("#agregar").on('click', function (e) {
+                    e.preventDefault();
+                    let item = $('#nombre').val();
+                    let estado = $('#estado').val();
+                    let deposito = $('#deposito').val();
+                    let porcentaje = $('#porcentaje').val();
+                    let game = $('#game').val();
+
+                    $.ajax({
+                        url: '/agregar-item',
+                        method: 'POST',
+                        data: {
+                           item:item,
+                           estado:estado,
+                           deposito:deposito,
+                           porcentaje:porcentaje,
+                            game: game,
+                        },
+                        success: function (response) {
+                            $("#lista").click();
+
+                            alertas(response);
+                        }
+                    })
+                });
+
+ 
+                $("#eliminar").on('click', function (e) {
+                    let newID = $('#id').val();
+                    e.preventDefault();
+                    $.ajax({
+                        url: '/eliminar-item',
+                        method: 'POST',
+                        data: {
+                            id: newID
+                        },
+                        success: function (response) {
+                            $("#lista").click();
+                            alertas(response);
+
+                        }
+                    })
+                });
+
+                $("#actualizar").on('click', function (e) {
+                    let id = $('#id').val();
+                    let item = $('#nombre').val();
+                    let estado = $('#estado').val();
+                    let deposito = $('#deposito').val();
+                    let porcentaje = $('#porcentaje').val();
+                    let game = $('#game').val();
+
+
+                    e.preventDefault();
+                    $.ajax({
+                        url: '/update-item',
+                        method: 'POST',
+                        data: {
+                           estado:estado,
+                           deposito:deposito,
+                           porcentaje:porcentaje,
+                            game: game,
+                            id: id
+                        },
+                        success: function (response) {
+                            $("#lista").click();
+                            alertas(response);
+
+                        }
+                    })
+                });
+
+
+
+                $("#jacpotid").on('click', function (e) {
+                    let total = $('#saldo').val();
+                    let idjack = $('#ids').val();
+                    let imgurl = $('#imgurl').val();
+                    let personaname = $('#personaname').val();
+                    e.preventDefault();
+
+                    $.ajax({
+                        url: '/update-jack',
+                        method: 'POST',
+                        data: {
+                            total: total,
+                            idjack:idjack,
+                            imgurl:imgurl,
+                            personaname:personaname
+                        },
+                        success: function (response) {
+                            $("#lista").click();
+                            alertas(response);
+
+                        }
+                    })
+                });
+ })
+
+ function alertas(response){
+     
+     const Toast = Swal.mixin({
+         toast: true,
+         position: 'top-end',
+         showConfirmButton: false,
+         timer: 3000,
+         timerProgressBar: true,
+         onOpen: (toast) => {
+           toast.addEventListener('mouseenter', Swal.stopTimer)
+           toast.addEventListener('mouseleave', Swal.resumeTimer)
+         }
+       })
+       
+       Toast.fire({
+         icon: response.succes,
+         title: response.estado
+       })
+ }
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> 
+   <%- include('scripts.ejs'); -%>
+</body>
+<%- include('footer.ejs'); -%>
+</html>

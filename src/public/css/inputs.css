@@ -1,0 +1,58 @@
+.formStile{
+    width: 100%;
+    height: 50px;
+    max-width: 200px;
+    position: relative;
+    overflow: hidden;
+}
+.formStile input{
+    width: 100%;
+    height: 100%;
+    background: none;
+    color: #fff;
+    padding: top 20px;
+    border: none;
+    outline: 0px;
+
+}
+.formStile .label-nom{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-bottom: 1px solid #fff;
+}
+.formStile .label-nom:after{
+content: "";
+position: absolute;
+left: 0;
+bottom: -1px;
+width: 100%;
+height: 100%;
+border-bottom: 3px solid #2A8EBD;
+transform: translateX(-100%);
+transition: all 0.3s ease;
+}
+.text-nom{
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    transition: all 0.3s ease;
+    color: #fff;
+
+}
+
+.formStile input:focus + .label-nom .text-nom,
+.formStile input:valid + .label-nom .text-nom
+{
+    transform: translateY(-90%);
+    font-size: 14px;
+    color:rgba(17 133 224) ;
+
+}
+.formStile input:focus + .label-nom:after,
+.formStile input:valid + .label-nom:after{
+transform: translateX(0%);
+}

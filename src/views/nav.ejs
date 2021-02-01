@@ -1,0 +1,91 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+  <a class="nav-link " href="/"><img src="/svg/shuriken7.svg" width="40px"  class="mr-2" >
+    <img src="/svg/betlogo.png" width="130px">
+  </a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse ml-3" id="navbarNavDropdown">
+    <ul class="navbar-nav" id="ejm2">
+      <li class="nav-item active ">
+        <a class="nav-link text-light  le " href="/profile"><i class="fas fa-dice"></i> Bets<span
+            class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active ml-2 ">
+        <a class="nav-link  text-light le" href="/deposit"><i class="fas fa-angle-double-down"></i> Depositar</a>
+      </li>
+      <li class="nav-item active ml-2 ">
+        <a class="nav-link  text-light  le" href="/withdraw"><i class="fas fa-angle-double-up"></i> Retirar</a>
+      </li>
+      <%if(user===""){%> <%}else{%>
+      <li class="nav-item dropdown active ml-2">
+
+        <a class="nav-link   text-light  le " id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <div id="kev"><i class="fas fa-angle-down"></i> <%= user.personaname%></div>
+
+        </a>
+
+        <div class="dropdown-menu bg-dark " aria-labelledby="navbarDropdown">
+          <a class="dropdown-item text-light" href="#"><i class="fas fa-gift"></i>  Sorteo Semanal</a>
+          
+          <a class="dropdown-item text-light" href="#"><i class="fas fa-chart-line"></i>  Referidos</a>
+          <a class="dropdown-item text-light" href="/blog"><i class="fas fa-pencil-ruler"></i>  Blog</a>
+          <a class="dropdown-item text-light" href="/questions"><i class="far fa-question-circle"></i>  Preguntas Frecuentes</a>
+
+          <%if(user.steamid==="76561198982979277"){%>
+            <a class="dropdown-item text-light" href="/consola"><i class="fas fa-book-dead"></i>  Consola</a>  
+            <a class="dropdown-item text-light" href="/items"><i class="fas fa-balance-scale"></i>  Items</a>  
+          <%}%>
+          <div class="dropdown-divider text-light"></div>
+          <a href="/logout" class="dropdown-item text-light"><i class="fas fa-sign-out-alt"></i>  Logout</a>
+        </div>
+      </li>
+
+      <%}%>
+      </ul>
+      <div class="badge badge-light  bg-dark   " style="width: 200px; " >
+        
+        
+        </div>
+      <%if(user===""){%>
+      <ul class="navbar-nav ml-auto ">
+        <a class="navbar-brand ml-4 " href="/auth/steam">
+          <img src="https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png" width="140"
+            height="30" class="d-inline-block align-top" alt="">
+
+        </a>
+
+      </ul>
+
+      <%}else{%>
+
+      <ul class="navbar-nav ml-auto">
+
+        <div class="badge badge-light text-wrap mr-3  bg-secondary mt-2  rkl  text-center border border-info"
+          style="width: 6rem; height: 2rem; border: 1px #406688;">
+
+          <div class="text-center text-light m-1">
+            <img src="/icon/gem.svg" alt="" style="width: 15px;" class="img-fluid rounded mx-auto ">
+            <%= saldo.saldo%>
+          </div>
+        </div>
+        <div class="badge badge-light  bg-dark mt-2 rkl   " style="width: 4rem; height: 2rem;"></div>
+
+        <a class="navbar-brand rkl">
+          <img src=" <%= user.avatar%>" width="38" height="38"
+            class="d-inline-block align-top border border-info rounded" alt="">
+
+        </a>
+
+
+
+      </ul>
+
+
+      <%}%>
+    </div>
+  </nav>

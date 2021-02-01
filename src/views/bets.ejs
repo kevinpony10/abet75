@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/inputs.css">
+
+    <%- include('header.ejs'); -%>
+    <title>Abet Skin | Bet</title>
+</head>
+
+<body>
+    <div class="bodyres">
+    <%- include('nav.ejs'); -%>
+    
+    
+   
+
+       
+            <div class="row text-light justify-content-start m-2 ">
+               
+               
+                <div class="col-sm-9  ">
+                
+                
+                
+                    <div class="row justify-content-center mt-2 ">
+                        <div class="col-2 text-center color rounded-top bord4 ">
+                            <select class="form-control form-control-sm bg-dark border border-dark text-light mt-2 " id="idSelect">
+                                <% consulta.forEach(function(consult,i){ %>
+                                <option class="opt" value="<%-consult.id -%>"><%-consult.tipo -%></option>
+                                <%})%>
+                            </select>
+                
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center color bord2 ">
+                        <div class="col-sm color bg-dark color m-3 bord rounded">
+                            <div class="row">
+                
+                                <div class="imagenes" style="background-image: url(<%-consulta[0].img1-%>);">
+                                </div>
+                
+                                <div class="col m-2 text-center">
+                                    <h5><%-consulta[0].team1 -%></h5>
+                                    <span class="text-info" id="spin1"><%-porc[0].porc1-%>%</span>
+                                  
+                                        <h6 class="text-light mt-3">PROFIT:
+                                           
+                    
+                                            <span class="text-light mul1"  id="mul1"></span>
+                                        </h6>
+                                   
+                                </div>
+                
+                
+                
+                
+                            </div>
+                            <div class="col-sm m-2">
+                                <div class="row ">
+                                    <div class="col ">
+                                        <form action="" class="formStile ">
+                                            <input type="number" step="0.01" class="t ganancia" required id="team1" autocomplete="off">
+                                            <label class="label-nom ">
+                                                <span class="text-nom">
+                                                    <img src="/icon/gem.svg" alt="" style="width: 14px;"
+                                                        class="img-fluid rounded mx-auto "> 00
+                                                </span>
+                                            </label>
+                
+                
+                                        </form>
+                                    </div>
+                                    <div class="col align-self-end mb-2 ml-4">
+                                        <button type="button" class="btn btn-sm rounded-lg ml-4  text-light boton"
+                                            style="background-color:#2A8EBD ;" id="t" value="<%-consulta[0].id-%>">
+                                            <i class="fas fa-chess-rook"></i>
+                                            Confirmar
+                                        </button>
+                
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col color bg-dark color m-3 bord rounded">
+                            <div class="row">
+                
+                                <div class="col m-2 text-center ">
+                                    <h5><%-consulta[0].team2 -%></h5>
+                                    <span class="text-info" id="spin2"><%-porc[0].porc2-%>%</span>
+                
+                                 
+                                    <h6 class="text-light mt-3">PROFIT:
+                
+                                        <span class="text-light mul2"  id="mul2"></span>
+                                    
+                                    </h6>
+                                  
+                                </div>
+                
+                                <div class="imagenes" style=" background-image: url(<%-consulta[0].img2-%>); ">
+                
+                                </div>
+                
+                
+                
+                            </div>
+                            <div class="col-sm m-2">
+                                <div class="row ">
+                                    <div class="col align-self-end mb-2 ml-4">
+                                        <button type="button" class="btn btn-sm rounded-lg ml-4 text-light boton"
+                                            style="background-color:#2A8EBD ;" value="<%-consulta[0].id-%>" id="e">
+                                            <i class="fas fa-chess-rook"></i>
+                                            Confirmar
+                                        </button>
+                
+                                    </div>
+                                    <div class="col ">
+                                        <form action="" class="formStile">
+                                            <input type="number" step="0.01" class="e ganancia" required id="team2" autocomplete="off">
+                                            <label class="label-nom ">
+                                                <span class="text-nom">
+                                                    <img src="/icon/gem.svg" alt="" style="width: 14px;"
+                                                        class="img-fluid rounded mx-auto "> 00
+                                                </span>
+                                            </label>
+                
+                
+                                        </form>
+                                    </div>
+                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center mt-2 " >
+                        <div class="col-12 color bord" style="height: 500px;">
+                            <div class="col-12 mt-4 bg-dark bord" style="height:450px;">
+                             <div class="row justify-content-center ">
+                                <iframe class="embed-responsive-item" width="100%" height="450px" src="https://www.youtube.com/embed/7QytLZHS6" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                             </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                
+                
+                
+                </div>
+
+            <div class="col-sm-3">
+                <div class="row justify-content-center  mt-4 ">
+                    
+                    <div class="col-11 color text-center bord" style="height: 170px;">
+                         <strong class="text-light "><i class="fas fa-trophy"></i> <%-consulta[0].torneo-%></strong>
+                         <div class="row justify-content-center" >
+                           
+                        <div class="col-7 bg-dark border border-secondary rounded mt-2 torneo" style="height: 90px; background-image: url(<%-consulta[0].imgTor-%>);">
+                        </div>
+                        <div id="crono" class="col-9 text-center  color mt-1"></div>
+
+                        </div>
+                    </div>
+
+                    <div class="color col-11 m-2 bord">
+            
+                        <h6 class="mt-2 ml-1"><i class="fas fa-stopwatch"></i> LAST BETS </h6>
+                        <ul class="list-group m-1 mt-2 mb-3 bord  bg-dark" style="height: 454px;  overflow-y: auto;" id="list">
+         
+                            <% apuestas.forEach(function(apuesta,i){ %>
+                                
+                                <div>
+                                    
+                                    
+                                        <%if(i%2===0){%>
+                                            <div class="toast-header  bord1 stylblue">
+                                            <%}else{%>
+                                                <div class="toast-header stylplom bord1">
+                                            <%}%>
+                                     
+                                            <div style="width: 65%;" class="textjust mr-auto"> <strong class=" text-light textjust"><%-apuesta.team -%></strong></div>
+                                      
+                                        <small class="text-light"><%-apuesta.tipo -%></small>
+                
+                                    </div>
+
+                
+                                    
+                                     <li   class="list-group-item d-flex justify-content-between align-items-center  bg-dark text-light bord3">
+                                        <img src="<%-apuesta.idimg -%>" alt="" style="width: 30px;" class="img-fluid rounded  ">
+                                        <div style="width: 50%;" class="textjust"> <span ><%-apuesta.name -%></span></div>
+                                        
+                                        <span class="badge badge-secondary badge-pill textjust">
+                                            <img src="/icon/gem.svg" alt="" style="width: 14px;" class="img-fluid rounded mx-auto ">
+                                            <%-apuesta.sal -%></span>
+                
+                                    </li>
+
+                                    
+                                    <div class=" text-center bord2">
+                                        <%if(i%2===0){%>
+                                            <small class="col  text-light  badge  stylblue "><i class="fas fa-clock "></i> 
+                                                <%-apuesta.time -%>   </small>
+                                            <%}else{%>
+                                                <small class="col  text-light  badge stylplom"><i class="fas fa-clock "></i> 
+                                                    <%-apuesta.time -%>   </small>
+                                            <%}%>
+                                        
+                                    </div>
+                
+                                </div>
+                        <%})%>
+                            
+            
+            
+            
+                        </ul>
+            
+            
+                    </div>
+                </div>
+            </div>
+           
+
+               
+               
+             
+            </div>
+      
+       
+            <script src="/socket.io/socket.io.js"></script> 
+        <%- include('scripts.ejs'); -%>
+     
+        
+        <!-- Create a Twitch.Player object. This will render within the placeholder div -->
+        
+        <script >
+            
+     
+          const socket = io();
+          var partida = "<%-consulta[0].bets-%>"
+          socket.on('new', partida=>{
+            $('#list').prepend(`<div>
+             <div class="toast-header stylver  bord1">
+              <div style="width: 65%;" class="textjust mr-auto"> <strong class=" text-light textjust">${partida[0].team}</strong></div>
+               <small class="text-light">${partida[0].tipo}</small>
+                </div>
+                 <li class="list-group-item d-flex justify-content-between align-items-center  bg-dark text-light bord3">
+                  <img src="${partida[0].idimg}" alt="" style="width: 30px;" class="img-fluid rounded border  ">
+                   <div style="width: 50%;" class="textjust"><span>${partida[0].name}</span></div>
+                    <span class="badge badge-secondary badge-pill">
+                     <img src="/icon/gem.svg" alt="" style="width: 14px;" class="img-fluid rounded mx-auto "> ${partida[0].sal}</span>
+                </li>
+                   <div class=" text-center bord2">
+                      <small class="col  text-light  badge stylver"><i class="fas fa-clock "></i> ${partida[0].time}</small>
+                    </div>  
+            </div>`);
+            
+             
+          });
+          
+          socket.emit('mensaje', partida);
+
+    
+        
+                $(document).ready(function () {
+
+                    var timer;
+                    var total1 = parseFloat("<%-consulta[0].total1-%>");
+                    var total2 = parseFloat("<%-consulta[0].total2-%>")
+                    var totalG = parseFloat("<%-consulta[0].total-%>");
+
+
+                    $("#idSelect").change(function () {
+                     
+                        var id = $("#idSelect option:selected").val()                      
+                        $.ajax({
+                            url: "/valores/"+id,
+                            success: function (data) {
+                                
+
+                                $('#spin1').replaceWith(`<span class="text-info m-1" id="spin1">${data[0].porc1}%</span>`);
+                                $('#spin2').replaceWith(`<span class="text-info " id="spin2">${data[0].porc2}%</span>`);
+                                total1 = parseFloat(`${data[0].total1}`)
+                                total2 = parseFloat(`${data[0].total2}`)
+                                totalG = parseFloat(`${data[0].total}`)
+                               
+                                // $('#mul1').replaceWith(`<span class="text-light " id="mul1">x ${data[0].total1}</span>`);
+                                // $('#mul2').replaceWith(`<span class="text-light " id="mul2">x ${data[0].total2}</span>`);
+                            }
+                            
+                        })
+
+                    });
+
+                    $(".boton").click(function () {
+
+                    var team = $(this).attr("id");
+                    var id = $("#idSelect option:selected").val()
+                    var valor;
+                    if(team=="t"){
+                      valor = $(".t").val();
+                    }else{
+                        valor = $(".e").val();
+                    }
+                  
+                        if (valor == "" && !$.isNumeric(valor)) {
+                            alert("Ingrese Valores validos")
+                            $(`.${team}`).val("");
+                            $(`.${team}`).focus();
+                           
+                        } else {
+                            $.ajax({
+                                url: '/apuesta',
+                                method: 'POST',
+                                data: {
+                                    valor: valor,
+                                    id: id,
+                                    team: team,
+                                    bets:"<%-consulta[0].bets-%>"
+                                },
+                                success: function (response) {
+                                    alertas(response);
+                                  
+                                }
+                            })
+                        }
+                    })
+                    
+
+                    $(".ganancia").on("keyup", async function () {
+                        clearTimeout(timer);
+                        var tot;
+                        var respuesta = $(this).attr("id");
+                        var cantidad = parseFloat($(`#${respuesta}`).val());
+
+                    
+
+                        if (respuesta == "team1") {
+                             tot = total1;
+
+                            $('#mul1').replaceWith(`<span class="spinner-border spinner-border-sm text-info mul1" role="status" id="mul1"></span>`);
+
+                        } else {
+                             tot = total2;
+
+                            $('#mul2').replaceWith(`<span class="spinner-border  spinner-border-sm text-info  mul2" role="status" id="mul2"></span>`);
+
+
+                        }
+
+
+                        var subtotal = tot + cantidad;
+
+                        timer = await setTimeout(function () {
+                            var newtotal = cantidad + totalG;
+                            var porc = cantidad * 100 / subtotal;
+                            var calculo = porc / 100 * newtotal;
+                            calculo = calculo.toFixed(2);
+
+
+                            if (respuesta == "team1") {
+                                $('#mul1').replaceWith(`<span class="text-light" id="mul1" >+ <img src="/icon/gem.svg" alt="" style="width: 15px;" class="mb-1" > ${calculo}</span>`);
+
+                            } else {
+                                $('#mul2').replaceWith(`<span class="text-light" id="mul2" >+ <img src="/icon/gem.svg" alt="" style="width: 15px;" class="mb-1" > ${calculo}</span>`);
+
+                            }
+
+
+
+                        }, 750)
+                    
+                    
+                    });
+
+                
+
+
+                    
+                })
+
+               
+
+    function alertas(response) {
+
+        Swal.fire({
+            icon: response.succes,
+            title: response.estado,
+            background: "#343A40",
+            timer: 3000,
+            showConfirmButton: false,
+            toast: true,
+            width: "200px",
+            customClass: {
+                title: "text-light"
+            }
+        })
+    }
+        
+        
+
+
+    const getRemainTime = deadline=>{
+        let now = new Date();
+        tiempo = (new Date(deadline)-now+1000)/1000;
+        
+         segundo = ('0'+Math.floor(tiempo  % 60 )).slice(-2);
+	     minutos =('0'+Math.floor(tiempo / 60 % 60 )).slice(-2);
+		 horas = ('0'+Math.floor(tiempo / 3600 % 24 )).slice(-2);
+         dias = Math.floor(tiempo/(3600*24));
+         return{tiempo,segundo,minutos,horas,dias}
+
+    }
+  
+   
+  
+         const countdown  = (deadline,elem)=>{
+             const ele = document.getElementById(elem);
+
+             const timerUpdate = setInterval(()=>{
+                 let t = getRemainTime(deadline);
+
+                ele.innerHTML = `
+                
+                <h5 class="mt-2">
+                    <div class="badge bordright textjust">${t.dias}d  </div>
+                    <div class="badge bordright     textjust">${t.horas}h </div>
+                    <div class="badge bordright    textjust">${t.minutos}m </div>
+                    <div class="badge bordright     textjust">${t.segundo}s </div>
+                </h5>
+                    `
+
+               
+                if (t.tiempo <= 1) {
+                    clearInterval(timerUpdate)
+                    ele.innerHTML = `<h5 class="mt-2"><div class="badge badge-danger border border-secondary  textjust">En Vivo</div></h5>`;
+                    
+                }
+
+             },1000)
+         }
+
+         countdown("<%-consulta[0].time-%>","crono")
+
+ 
+        
+ 
+   
+
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> 
+        <%- include('footer.ejs'); -%>
+    </div>
+</body>
+
+
+</html>
