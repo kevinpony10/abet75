@@ -19,6 +19,9 @@ var server = require('http').Server(app);
 require('./config/socket').connection(server);
 const {getSocket}= require('./config/socket')
 
+const localBet = "http://localhost:3000/";
+const abetskin = "https://abetskins.com/";
+
 var SteamCommunity = require('steamcommunity');
 var SteamTotp = require("steam-totp");
 var steam = new SteamCommunity();
@@ -66,9 +69,11 @@ passport.deserializeUser((obj, done) => {
 	done(null, obj);
 });
 
+
+
 passport.use(new SteamStrategy({
-	returnURL: 'http://localhost:3000/auth/steam/return'
-	, realm: 'http://localhost:3000/'
+	returnURL: localBet+'auth/steam/return'
+	, realm: localBet
 	, apiKey: config.apiKey
 }, (identifier, profile, done) => {
 	return done(null, profile);
