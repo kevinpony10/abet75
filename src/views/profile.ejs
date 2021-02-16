@@ -16,7 +16,7 @@
             <div class="col-sm-9 ph ">
                 <div class="row">
                     <div class="col-12 color  m-1 mb-2 ph2 bord "   >
-                      <h6 class="text-light text-center mt-2">ACTIVE BETS</h6>
+                      <h5 class="text-light text-center mt-2">ACTIVE BETS</h5>
                       <div class="row m-1 mt-3  justify-content-start "  >
                         <%if(user===""){%>
                           <div class="card bg-dark  skin text-light cardper mr-4 mt-1 ml-4 col4">
@@ -76,11 +76,12 @@
                                 <h6 class="card-title platabord textjust"><%-hi.team%></h6>
                                 <span class="badge badge-secondary badge-pill">
                                   <img src="/icon/gem.svg" alt="" style="width: 14px;" class="img-fluid rounded mx-auto ">
-                                  <%-hi.apuesta%></span>
-                                  <h6 class="enc mt-2"><%-hi.newtime%> - <%-hi.game%></h6>
+                                  <%-hi.apuesta%> </span>  <span class="enc text-warning">x <%-hi.por%></span>
+                                  <h6 class="enc mt-2"><%-hi.newtime%> - <%-hi.game%>  </h6>
+                                 
                                   <small class="col  text-light  badge stylver mt-2">Profit: <img src="/icon/gem.svg" alt="" style="width: 14px;"
                                     class="img-fluid rounded mx-auto ">
-                                  <%-hi.t%></small>
+                                  <%-hi.ptotal%></small>
                               </div>
                             </div>
                              
@@ -90,12 +91,12 @@
                        </div>
                     </div>
 
-                    <div class="col-12 color  m-1 mb-2 ph2 bord" >
-                      <h6 class="text-light text-center mt-2">LAST BETS</h6>
+                    <div class="col-12 color   m-1 mb-2 ph2 bord"  >
+                      <h5 class="text-light text-center mt-2">LAST BETS</h5>
                       <div class="row m-1 mt-3  justify-content-start "  >
                        <%if(user===""){%>
 
-                         <div class="card bg-dark skin text-light cardper mr-4 mt-1 ml-4 col4" >
+                         <div class="card bg-dark skin text-light cardper mr-4 mt-1 ml-4 col4 " >
                              
                                 <div class=" imgfront img-fluid rounded mx-auto d-block " style="background-image: url(img/gris.jpg); width: 5rem; ">
                                 </div>
@@ -151,13 +152,13 @@
                                 <h6 class="card-title platabord textjust"><%-hi.team%></h6>
                                 <span class="badge badge-secondary badge-pill">
                                   <img src="/icon/gem.svg" alt="" style="width: 14px;" class="img-fluid rounded mx-auto ">
-                                  <%-hi.apuesta%></span>
+                                  <%-hi.apuesta%></span> <span class="enc text-warning">x <%-hi.por%></span>
                                 <h6 class="enc mt-2"><%-hi.newtime%> - <%-hi.game%></h6>
                                 <%if(hi.win==="Team-1"){%>
                                   <%if(hi.equipo==="t"){%>
                                   <small class="col  text-light  badge stylver">Profit: <img src="/icon/gem.svg" alt="" style="width: 14px;"
                                       class="img-fluid rounded mx-auto ">
-                                    <%-hi.t%></small>
+                                      <%-hi.ptotal%></small>
                                   <%}else{%>
                                     <small class="col  text-light  badge bg-danger">Loss: <img src="/icon/gem.svg" alt="" style="width: 14px;"
                                       class="img-fluid rounded mx-auto ">
@@ -169,7 +170,7 @@
                                   <%if(hi.equipo==="e"){%>
                                   <small class="col  text-light  badge stylver">Profit: <img src="/icon/gem.svg" alt="" style="width: 14px;"
                                       class="img-fluid rounded mx-auto ">
-                                    <%-hi.t%></small>
+                                      <%-hi.ptotal%></small>
                                   <%}else{%>
                                     <small class="col  text-light  badge bg-danger">Loss: <img src="/icon/gem.svg" alt="" style="width: 14px;"
                                       class="img-fluid rounded mx-auto ">

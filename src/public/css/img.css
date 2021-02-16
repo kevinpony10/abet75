@@ -1,6 +1,6 @@
 .imagenes{
-    width: 90px; 
-    height: 70px;
+    width: 100px; 
+    height: 80px;
     background-size: 100% 100%;
     margin: 1em;
     margin-left: 4em;
@@ -85,6 +85,10 @@
 .blogimg{
   
     background-size: 100% 100%;
+}
+
+.fondo{
+    background-image: url(img/fondo1.png);
 }
 
 

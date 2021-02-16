@@ -28,11 +28,11 @@ var steam = new SteamCommunity();
 var TradeOfferManager = require('steam-tradeoffer-manager');
 const config = require('./config/config.js');
 var manager = new TradeOfferManager({
-    "domain": "https://serversteam.vercel.app/", //your domain API KEY
+    "domain": "https://abetskins.com/", //your domain API KEY
     "language": "en",
     "pollInterval": 30000,
-    "cancelTime" : 600000,
-    "pendingCancelTime" : 600000
+    "cancelTime" : 120000,
+    "pendingCancelTime" : 120000
   
   });
 
@@ -72,8 +72,8 @@ passport.deserializeUser((obj, done) => {
 
 
 passport.use(new SteamStrategy({
-	returnURL: localBet+'auth/steam/return'
-	, realm: localBet
+	returnURL: abetskin+'auth/steam/return'
+	, realm: abetskin
 	, apiKey: config.apiKey
 }, (identifier, profile, done) => {
 	return done(null, profile);
@@ -85,9 +85,9 @@ var sesion =session({
 	key: 'session_id'
 	, secret: 'almatrass'
 	, resave: true
-	, saveUninitialized: true
+	, saveUninitialized: false
 	, cookie: {
-		maxAge: 259200000
+		maxAge: 86400000
 	}
 })
 app.use(sesion);
@@ -152,16 +152,17 @@ app.post('/items', async (req, res) => {
 		var cont = 0;
 		var total = 0;
 		var steamid = req.user.steamid;
-		var prom = req.user.personaname.indexOf("ABETSKIN.COM") > -1
+		var prom = req.user.personaname.indexOf("ABETSKINS.COM") > -1
 		var porc;
-		try {
+		var offer="";
+		
 			var result = await pool.query("SELECT * FROM usuario WHERE userId ='" + steamid + "'");
 			var its = await pool.query("SELECT item,deposito FROM lista");
 			if (result == 0) {
 				res.json({ estado: "no se encontro registro ", succes: "error" })
 			} else {
 				if (result[0].oferta==="on") {
-					res.json({ estado: "tienes una oferta pendiente", succes: "error" })				
+					res.json({ estado: "esta desactivado el bot o tienes una oferta pendiente", succes: "error" })				
 					} else {
 						if (result[0].url == "") {
 							res.json({ estado: "Ingresa URL de intercambio", succes: "error" })
@@ -170,7 +171,7 @@ app.post('/items', async (req, res) => {
 								if (err) {
 									res.json({ estado: "Al cargar inventario ", succes: "error" })
 								} else {
-									const offer = manager.createOffer(result[0].url);
+									 offer = manager.createOffer(result[0].url);
 									inventory.forEach(function (item) {
 										for (var i = 0; i < data.length; i++) {
 											if (item.assetid === data[i].assetid) {
@@ -240,9 +241,7 @@ app.post('/items', async (req, res) => {
 						}
 					}
 			}
-		} catch (error) {
-			res.json({ estado: "erro de conexion ", succes: "error" })
-		}
+		
 	}else {
 		res.json({ estado: "Inicia Sesión", succes: "info" })
 	 }
@@ -255,12 +254,13 @@ app.post('/windraw', async (req, res) => {
 	if (req.user) {
 		var cont = 0;
 		var total = 0;
-		let data = req.body;
+		var data = req.body;
 		var steamid = req.user.steamid;
-		try {
+		var offer="";
+		
 			var result = await pool.query("SELECT * FROM usuario WHERE userId ='" + steamid + "'");
 			var its = await pool.query("SELECT item,retiro FROM lista");
-			let {saldo , depositado,apostado}  = result[0];
+			var {saldo , depositado,apostado}  = result[0];
 			depositado = depositado/2;	
 			if (depositado>apostado) {
 				depositado = depositado-apostado;
@@ -271,7 +271,7 @@ app.post('/windraw', async (req, res) => {
 					res.json({ estado: "no se encontro registro ", succes: "error" })
 				} else {
 					if (result[0].oferta==="on") {
-					res.json({ estado: "tienes una oferta pendiente", succes: "error" })
+					res.json({ estado: "esta desactivado el bot o tienes una oferta pendiente", succes: "error" })
 						
 					} else {
 						if (result[0].url == "") {
@@ -279,9 +279,9 @@ app.post('/windraw', async (req, res) => {
 						} else {
 							manager.getInventoryContents(570, 2, true, (err, inventory) => {
 								if (err) {
-									res.json({ estado: "Erro al cargar inventario ", succes: "error" })
+									res.json({ estado: "Error al cargar inventario ", succes: "error" })
 								} else {
-									const offer = manager.createOffer(result[0].url);
+									 offer = manager.createOffer(result[0].url);
 									inventory.forEach(function (item) {
 										for (var i = 0; i < data.length; i++) {
 											if (item.assetid === data[i].assetid) {
@@ -296,34 +296,32 @@ app.post('/windraw', async (req, res) => {
 										}
 									})
 									if (cont == data.length) {
-										if (saldo>=total) {
-											offer.getUserDetails((err, me, them) => {
-												if (err) {
-													res.json({ estado: "cant trade!", succes: "error" })
-												} else {
-													if (them.escrowDays === 0) {												
+										if (saldo>=total) {																																					
 														let newSaldo = saldo - total;
 														newSaldo = newSaldo.toFixed(2);
 														pool.query("UPDATE usuario Set oferta='on' , saldo=? WHERE userId=?", [newSaldo,steamid], (err, result) => {
 															if (err) {
-																res.json({ estado: "Erro de conexión intentalo mas tarde", succes: "error" })
+																res.json({ estado: "Error de conexión intentalo mas tarde", succes: "error" })
 
 															} else {
 																offer.send((err, status) => {
 																	if (err) {
 																		pool.query("UPDATE usuario Set saldo=?,oferta='off' WHERE userId=?", [saldo, steamid], (err, result) => {
 																			if (err) {
-																				res.json({ estado: "Erro de conexión intentalo mas tarde", succes: "error" })
+																				res.json({ estado: "Error de conexión intentalo mas tarde", succes: "error" })
 																			} else {
-																				res.json({ estado: "Erro con el servidor de Steam", succes: "error" });
+																				res.json({ estado: "Error con el servidor de Steam", succes: "error" });
 																			}
 																		});
 																	} else {
 																		if (status == 'pending') {
-																			// We need to confirm it
-																			steam.acceptConfirmationForObject(identitySecret, offer.id, async function (err) {
+																		
+																			steam.acceptConfirmationForObject(identitySecret, offer.id,  function (err) {
+																				if (err) {
+																					res.json({ estado: "Error al cofirmar trade , actualizando saldo espera unos minutos", succes: "error" })
+																				} else {
 																					total = total.toFixed(2)
-																					await pool.query("INSERT INTO depostio (steamid,dTime,estado,precio,offertId) VALUES('" + steamid + "',now(),'retiro'," + total + ",'" + offer.id + "')", (err, result) => {
+																					 pool.query("INSERT INTO depostio (steamid,dTime,estado,precio,offertId) VALUES('" + steamid + "',now(),'retiro'," + total + ",'" + offer.id + "')", (err, result) => {
 																						if (err) {	
 																							console.log(err)																		
 																						} else {	
@@ -331,8 +329,7 @@ app.post('/windraw', async (req, res) => {
 
 																					}
 																					})
-
-																				
+																				}													
 																			});
 																		}
 
@@ -340,12 +337,8 @@ app.post('/windraw', async (req, res) => {
 					
 																})
 															}
-														})												
-													} else {
-														res.json({ estado: "tienes retención de  trade!", succes: "error" })
-													}
-												}
-											})
+														})																																					
+											
 										} else {
 											res.json({ estado: "Saldo Insuficiente", succes: "error" })	
 										}
@@ -360,11 +353,7 @@ app.post('/windraw', async (req, res) => {
 					
 				}
 			}
-			
-		} catch (error) {
-			console.log(error)
-			res.json({ estado: "erro de conexion ", succes: "error" })
-		}
+
 	} else {
 		res.json({ estado: "Inicia Sesión", succes: "info" })
 	}
@@ -376,7 +365,6 @@ app.use(require('./routes/peticiones'));
 
 manager.on("sentOfferChanged", async (offer, oldState) => { 
     try {
-
         let offertId = offer.id;
         if (offer.state === 2) {
             console.log("oferta enviada")

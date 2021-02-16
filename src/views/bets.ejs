@@ -45,13 +45,15 @@
                 
                                 <div class="col m-2 text-center">
                                     <h5><%-consulta[0].team1 -%></h5>
-                                    <span class="text-info" id="spin1"><%-porc[0].porc1-%>%</span>
-                                  
-                                        <h6 class="text-light mt-3">PROFIT:
-                                           
-                    
-                                            <span class="text-light mul1"  id="mul1"></span>
-                                        </h6>
+                                    <span class="text-info txp" id="spin1"><%-porc[0].porc1-%>%    </span>
+                                    <strong class="text-warning txp2" id="spinx1">x <%-porc[0].xpor1-%></strong>
+
+
+                                    <h6 class="text-light mt-3">
+                
+                                       <span class="mul2 text-light txp3" ><strong id="mulv1">1.00  </strong>   por <strong id="mul1">  <img src="/icon/gem.svg" alt="" style="width: 15px;" class="mb-1" ><%-porc[0].xpor1-%></strong></span> 
+                                    
+                                    </h6>
                                    
                                 </div>
                 
@@ -75,10 +77,10 @@
                                         </form>
                                     </div>
                                     <div class="col align-self-end mb-2 ml-4">
-                                        <button type="button" class="btn btn-sm rounded-lg ml-4  text-light boton"
+                                        <button type="button" class="btn btn-sm rounded-lg btn-block    text-light boton"
                                             style="background-color:#2A8EBD ;" id="t" value="<%-consulta[0].id-%>">
                                             <i class="fas fa-chess-rook"></i>
-                                            Confirmar
+                                            CONFIRMAR
                                         </button>
                 
                                     </div>
@@ -90,12 +92,12 @@
                 
                                 <div class="col m-2 text-center ">
                                     <h5><%-consulta[0].team2 -%></h5>
-                                    <span class="text-info" id="spin2"><%-porc[0].porc2-%>%</span>
+                                    <span class="text-info txp" id="spin2"><%-porc[0].porc2-%>%    </span>
+                                    <strong class="text-warning txp2" id="spinx2">x <%-porc[0].xpor2-%></strong>
+
+                                    <h6 class="text-light mt-3">
                 
-                                 
-                                    <h6 class="text-light mt-3">PROFIT:
-                
-                                        <span class="text-light mul2"  id="mul2"></span>
+                                       <span class="mul2 text-light txp3" ><strong id="mulv2">1.00  </strong>   por <strong id="mul2">  <img src="/icon/gem.svg" alt="" style="width: 15px;" class="mb-1" ><%-porc[0].xpor2-%></strong></span> 
                                     
                                     </h6>
                                   
@@ -110,11 +112,11 @@
                             </div>
                             <div class="col-sm m-2">
                                 <div class="row ">
-                                    <div class="col align-self-end mb-2 ml-4">
-                                        <button type="button" class="btn btn-sm rounded-lg ml-4 text-light boton"
+                                    <div class="col align-self-end mb-2 mr-4">
+                                        <button type="button" class="btn btn-sm rounded-lg btn-block  text-light boton"
                                             style="background-color:#2A8EBD ;" value="<%-consulta[0].id-%>" id="e">
                                             <i class="fas fa-chess-rook"></i>
-                                            Confirmar
+                                            CONFIRMAR
                                         </button>
                 
                                     </div>
@@ -271,9 +273,8 @@
                 $(document).ready(function () {
 
                     var timer;
-                    var total1 = parseFloat("<%-consulta[0].total1-%>");
-                    var total2 = parseFloat("<%-consulta[0].total2-%>")
-                    var totalG = parseFloat("<%-consulta[0].total-%>");
+                    var total1 = parseFloat("<%-porc[0].xpor1-%>");
+                    var total2 = parseFloat("<%-porc[0].xpor2-%>")
 
 
                     $("#idSelect").change(function () {
@@ -284,12 +285,17 @@
                             success: function (data) {
                                 
 
-                                $('#spin1').replaceWith(`<span class="text-info m-1" id="spin1">${data[0].porc1}%</span>`);
-                                $('#spin2').replaceWith(`<span class="text-info " id="spin2">${data[0].porc2}%</span>`);
-                                total1 = parseFloat(`${data[0].total1}`)
-                                total2 = parseFloat(`${data[0].total2}`)
-                                totalG = parseFloat(`${data[0].total}`)
-                               
+                                $('#spin1').replaceWith(`<span class="text-info txp" id="spin1">${data[0].porc1}%    </span>`);
+                                $('#spinx1').replaceWith(`<strong class="text-warning txp2" id="spinx1">x ${data[0].xpor1}</span>`);
+                                $('#mul1').replaceWith(`<span class="text-light" id="mul1" >   <img src="/icon/gem.svg" alt="" style="width: 15px;" class="mb-1" > ${data[0].xpor1}</span>`);
+
+                                $('#spin2').replaceWith(`<span class="text-info " id="spin2">${data[0].porc2}%   </span>`);
+                                $('#spinx2').replaceWith(`<strong class="text-warning txp2" id="spinx2">x ${data[0].xpor2}</span>`);
+                                $('#mul2').replaceWith(`<strong class="text-light" id="mul2" >  <img src="/icon/gem.svg" alt="" style="width: 15px;" class="mb-1" > ${data[0].xpor2}</strong>`);
+                                
+                                total1 = parseFloat(`${data[0].xpor1}`)
+                                total2 = parseFloat(`${data[0].xpor2}`)
+                                
                                 // $('#mul1').replaceWith(`<span class="text-light " id="mul1">x ${data[0].total1}</span>`);
                                 // $('#mul2').replaceWith(`<span class="text-light " id="mul2">x ${data[0].total2}</span>`);
                             }
@@ -338,43 +344,39 @@
                         var tot;
                         var respuesta = $(this).attr("id");
                         var cantidad = parseFloat($(`#${respuesta}`).val());
-
+                       
                     
 
                         if (respuesta == "team1") {
                              tot = total1;
 
-                            $('#mul1').replaceWith(`<span class="spinner-border spinner-border-sm text-info mul1" role="status" id="mul1"></span>`);
-
                         } else {
                              tot = total2;
-
-                            $('#mul2').replaceWith(`<span class="spinner-border  spinner-border-sm text-info  mul2" role="status" id="mul2"></span>`);
-
 
                         }
 
 
-                        var subtotal = tot + cantidad;
+                        var subtotal = tot * cantidad;
 
-                        timer = await setTimeout(function () {
-                            var newtotal = cantidad + totalG;
-                            var porc = cantidad * 100 / subtotal;
-                            var calculo = porc / 100 * newtotal;
+                     
+                            var calculo = subtotal;
                             calculo = calculo.toFixed(2);
+                            cantidad = cantidad.toFixed(2);
 
 
                             if (respuesta == "team1") {
-                                $('#mul1').replaceWith(`<span class="text-light" id="mul1" >+ <img src="/icon/gem.svg" alt="" style="width: 15px;" class="mb-1" > ${calculo}</span>`);
+                                $('#mul1').replaceWith(`<span class="text-light" id="mul1" >   <img src="/icon/gem.svg" alt="" style="width: 15px;" class="mb-1" > ${calculo}</span>`);
+                                $('#mulv1').replaceWith(`<strong class="text-light" id="mulv1" > ${cantidad}</strong>`);
 
                             } else {
-                                $('#mul2').replaceWith(`<span class="text-light" id="mul2" >+ <img src="/icon/gem.svg" alt="" style="width: 15px;" class="mb-1" > ${calculo}</span>`);
+                                $('#mul2').replaceWith(`<strong class="text-light" id="mul2" >  <img src="/icon/gem.svg" alt="" style="width: 15px;" class="mb-1" > ${calculo}</strong>`);
+                                $('#mulv2').replaceWith(`<strong class="text-light" id="mulv2" > ${cantidad}</strong>`);
 
                             }
 
 
 
-                        }, 750)
+                        
                     
                     
                     });

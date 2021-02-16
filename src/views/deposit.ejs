@@ -51,6 +51,7 @@
                                     class="img-fluid rounded mx-auto ">
                                 <%= item.retiro %> <%if(saldo.prom==="on"){%> <span class="text-success por ">+3%</span> <%}%>
                             </p>
+                            <input  type="hidden" value="<%= item.retiro %>" id="r<%=i%>">
                         </span>
                 
                     </div>
@@ -68,7 +69,8 @@
                     <form id="form2" action="/items" method="POST" style="background-color: #232C31; height: 100%;">
 
                         <div class="pt-3"></div>
-                        <h6 class="text-center ">Total Depositar</h6>
+                        <h6 class="text-center ">TOTAL A DEPOSITAR:  <img src="/icon/gem.svg" alt="" style="width: 15px;" class="img-fluid rounded mx-auto mb-1"><strong id="tretiro" class="txp3 " > 0.00</strong></h6>
+
                         <div class="pt-2"></div>
                         <div id="items2" class="text-light  platabord   mt-3 " style="width: 100%; height: 66%; overflow-y: scroll; ">
                        
@@ -89,6 +91,12 @@
             </div>
         </div>
     </div>
+
+    <div class="alert color border border-dark text-light mt-2 ml-4 mr-4 mb-2" role="alert">
+        <strong class="text-danger">NOTA:</strong> Para aumentar más tu deposito un <strong class="text-success txp2">3%</strong> más añade "ABETSKINS.COM" a tu nombre de steam. Recuerda no todos los articulos son permitidos por la página.</div>
+        </div>
+
+
     <%if(user===""){%> <%}else{%>
 
          <script>
@@ -135,15 +143,27 @@
 
               
                 $(document).ready(function () {
-                    
+                    var total =0;
                  
                     $(`#items`).on('click', 'div', function () {
                         $(this).appendTo('#items2');
+                        var idr =$(this).attr('id');
+                        var  ret = $(`#r${idr}`).val();
+                        total= parseFloat(total)+parseFloat(ret);
+                        total=total.toFixed(2)
+                        $('#tretiro').replaceWith(`<strong id="tretiro" class="txp3 " > ${total}</strong>`);
+
                         
                     })
 
                     $(`#items2`).on('click', 'div', function () {
                         $(this).prependTo('#items');
+                        var idr =$(this).attr('id');
+                        var  ret = $(`#r${idr}`).val();
+                        total= parseFloat(total) - parseFloat(ret);
+                        total=total.toFixed(2)
+                        $('#tretiro').replaceWith(`<strong id="tretiro" class="txp3 " > ${total}</strong>`);
+                      
                       
                         var mylist = $('#items');
                         var  id = $('#items> div').toArray().sort( function(a,b) { a.id - b.id } );
@@ -195,6 +215,21 @@
         });
         
                 function alertas(response) {
+                    if (response.offer) {
+                        Swal.fire({
+                        icon: response.succes,
+                        title: response.estado,
+                        background: "#343A40",
+
+                        showConfirmButton: false,
+                        customClass: {
+                            title: "text-light"
+                        },
+                        footer: `<span class="text-light"><strong class="text-danger">Nota:</strong> Puedes aceptar la oferta <a href="https://steamcommunity.com/tradeoffer/${response.offer}/" target="_blank">aquí</a> para más seguridad.</span>`
+
+                    })
+                         
+                     } else {
                     Swal.fire({
                         icon: response.succes,
                         title: response.estado,
@@ -204,7 +239,9 @@
                         customClass: {
                             title: "text-light"
                         }
-                    })}
+                    })
+                }
+                }
 
 
 

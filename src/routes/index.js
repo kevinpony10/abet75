@@ -40,7 +40,7 @@ async function value(user){
 		array.prom = "off"
 
 	} else {
-		let prom = personaname.indexOf("ABETSKIN.COM") > -1
+		let prom = personaname.indexOf("ABETSKINS.COM") > -1
 		var promo;
 		if (prom===true) {
 			 promo = "on";
@@ -167,8 +167,10 @@ async function retiro(items){
 	consulta = await pool.query("SELECT * FROM lista");
 
 for (let a = 0; a < items.length; a++) {
+	var ind = consulta.length;
 	
-	for (let i = 0; i < consulta.length; i++) {
+	for (let i = 0; i < ind; i++) {
+
 		if (consulta[i].item == items[a].name) {
 			var retiro =consulta[i].retiro;
 			var ret=retiro.toFixed(2);
@@ -179,7 +181,7 @@ for (let a = 0; a < items.length; a++) {
 			   retiro:ret
 
 			}
-			
+			ind=-1;
 		}
 		 
 	 }
@@ -265,7 +267,7 @@ async function topUser(users){
 		 var apuesta=user.apuesta;
 		 apuesta= apuesta.toFixed(2);
         top[i]={
-			nameId:user.name_id,
+			nameId:user.personaname,
 			idimg:user.idimg,
 			apuesta
 		}
@@ -281,7 +283,7 @@ async function userjack(users){
 		 var apuesta=user.apuesta;
 		 apuesta= apuesta.toFixed(2);
         top[i]={
-			nameId:user.name_id,
+			nameId:user.personaname,
 			idimg:user.idimg,
 			apuesta
 		}
@@ -298,13 +300,15 @@ async function history(historias){
 	var t;
 	historias.forEach((historia,i)=> {
 
-	var {total1,total2,total,apuesta,timeBet,equipo}=historia;
+	var {total1,total2,total,apuesta,timeBet,equipo,por}=historia;
 
 	 var apu = historia.apuesta;
 	  apu=apu.toFixed(2);
 	  var f = new Date(timeBet);
 	  var mes = 1+parseInt(f.getMonth()) 
 	  var newtime = f.getDate() + "/"+ mes+ "/" +f.getFullYear();
+	  var ptotal = por * apuesta;
+	  ptotal= ptotal.toFixed(2);
 
 		if (historia.equipo == "t") {
 			var porc1 =100 * apuesta;
@@ -340,7 +344,9 @@ async function history(historias){
 			  win:historia.gameWin,
 			  newtime,
 			  game:historia.game,
-			  equipo
+			  equipo,
+			  ptotal,
+			  por
 
 		  }
 		
@@ -353,10 +359,10 @@ async function history(historias){
 
 router.get('/', async (req, res) => {
 	const consulta = await pool.query(`SELECT * FROM tipo INNER JOIN bets ON tipo.bets_id = bets.bets WHERE bets.win="Pendiente" AND tipo.tipo="Global" ORDER BY time ASC` );
-	const consulta2 = await pool.query(`SELECT bets, team1, team2, img1, img2,game, time,gameWin FROM bets INNER JOIN tipo ON bets.bets=tipo.bets_id WHERE win="Finalizado"  AND tipo.tipo="Global"  ORDER BY time ASC LIMIT 8` );
+	const consulta2 = await pool.query(`SELECT bets, team1, team2, img1, img2,game, time,gameWin FROM bets INNER JOIN tipo ON bets.bets=tipo.bets_id WHERE win="Finalizado"  AND tipo.tipo="Global"  ORDER BY time DESC LIMIT 14` );
     const  consulta3 = await pool.query(`SELECT * FROM bets INNER JOIN tipo ON bets.bets = tipo.bets_id  WHERE tipo.tipo="Global" AND  bo = "JACK" ORDER BY time ASC LIMIT 1`)
-	const consulta4 = await pool.query(`SELECT name_id,idimg,apuesta FROM apuestas INNER JOIN usuario ON apuestas.id_steam=usuario.userId WHERE timeBet BETWEEN DATE_SUB(NOW(),INTERVAL 1 WEEK) AND NOW()  ORDER BY  apuesta DESC LIMIT 3`) 
-	const consulta5 = await pool.query(`SELECT name_id, apuesta ,idimg FROM apuestas INNER JOIN usuario ON usuario.userId=apuestas.id_steam  WHERE equipo= "p" LIMIT 1`)
+	const consulta4 = await pool.query(`SELECT personaname,idimg,apuesta FROM apuestas INNER JOIN usuario ON apuestas.id_steam=usuario.userId WHERE timeBet BETWEEN DATE_SUB(NOW(),INTERVAL 1 WEEK) AND NOW()  ORDER BY  apuesta DESC LIMIT 3`) 
+	const consulta5 = await pool.query(`SELECT personaname, apuesta ,idimg FROM apuestas INNER JOIN usuario ON usuario.userId=apuestas.id_steam  WHERE equipo= "p" LIMIT 1`)
 	var bets = await crono(consulta);
 	var last = await lastbets(consulta2);
 	var jack = await betjac(consulta3);
@@ -410,13 +416,74 @@ router.get('/bets/:i',async (req, res) => {
 		var {total1,total2,total}=consult;	
 		var p1 = total1/total;
 		var porc1 =100 * p1;
+		var pc1=(total1/total)*100;
 		
 
 		var p2 = total2/total;
 		var porc2 = 100 * p2;
+		var pc2=(total2/total)*100;
 
+		if (pc1 <= 30) {
+			if (pc1 <= 24) {
+				if (pc1 <= 14) {
+					if (pc1 <= 7) {
+						pc1 = pc1 + 4;
+					
+					} else {
+						pc1 = pc1 + 3.5;
+						
+					}
+				} else {
+					pc1 = pc1 + 2.5;
+				
+				}
+		
+			} else {
+				pc1 = pc1 + 1;
+				
+			}
+		}
+		if(pc1<95){
+			pc1 = 5 + pc1;
+			
+		}
+		var xpor1 = 100 / pc1;
+		
+
+		if (pc2 <= 30) {
+			if (pc2 <= 24) {
+				if (pc2 <= 14) {
+					if (pc2 <= 7) {
+						pc2 = pc2 + 4;
+					
+					} else {
+						pc2 = pc2 + 3.5;
+						
+					}
+				} else {
+					pc2 = pc2 + 2.5;
+					
+				}
+		
+			} else {
+				pc2 = pc2 + 1;
+			
+			}
+		}
+
+		if(pc2<95){
+			pc2 = 5 + pc2;
+			
+		}
+		var xpor2 = 100 / pc2;
+		
+		
 		porc1=porc1.toFixed(0);
+		xpor1 = xpor1.toFixed(2);
 		porc2=porc2.toFixed(0);
+		xpor2 = xpor2.toFixed(2);
+       
+
 
 		porc[i]={
 			porc1:porc1,
@@ -425,13 +492,13 @@ router.get('/bets/:i',async (req, res) => {
 			total2,
 			total,
 			id:consult.id,
-			
-
+			xpor1,
+			xpor2
 		}
 		 
 	})
 
-	var consu = await pool.query('SELECT name_id,apuesta,tipo,timeBet,team1,img1,equipo,team2,img2,idimg FROM apuestas INNER JOIN usuario ON apuestas.id_steam = usuario.userId INNER JOIN tipo ON apuestas.id_bet= tipo.id INNER JOIN bets ON tipo.bets_id = bets.bets   WHERE be='+id+' ORDER BY id_apuesta DESC LIMIT 4');
+	var consu = await pool.query('SELECT name_id,apuesta,tipo,timeBet,team1,img1,equipo,team2,img2,idimg FROM apuestas INNER JOIN usuario ON apuestas.id_steam = usuario.userId INNER JOIN tipo ON apuestas.id_bet= tipo.id INNER JOIN bets ON tipo.bets_id = bets.bets   WHERE be='+id+' ORDER BY id_apuesta DESC LIMIT 6');
 	var apuestas =[] ;
 	
 	consu.forEach((ele , i) => {
@@ -472,7 +539,7 @@ router.get('/profile',async(req,res)=>{
 	if (req.user) {
 		var validar= req.user;
 		var val = await value(validar) 
-		var consulta = await pool.query("SELECT apuesta,equipo,timeBet,total1,total2,total,team1,team2,img1,img2,gameWin,game FROM apuestas INNER JOIN tipo ON  apuestas.id_bet=tipo.id INNER JOIN bets ON apuestas.be=bets.bets  WHERE id_steam ='"+req.user.steamid+"'")
+		var consulta = await pool.query("SELECT apuesta,equipo,timeBet,total1,total2,total,team1,team2,img1,img2,gameWin,game,por FROM apuestas INNER JOIN tipo ON  apuestas.id_bet=tipo.id INNER JOIN bets ON apuestas.be=bets.bets  WHERE id_steam ='"+req.user.steamid+"'")
 		var histo = await history(consulta); 
 		res.render('profile.ejs',{user:validar,saldo:val,his:histo})
 		} else {
@@ -564,7 +631,18 @@ router.get('/withdraw', async (req, res) => {
 						assetid: item.assetid,
 						img: item.icon_url
 					});
+					
 				})
+
+				items.push({
+					name: "Genuine Lava Baby Roshan",assetid: "172548657458",img: "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXA7hlNJ48g5hlcTlXvVeu-34DRUl9tNwtEvrurFAJs1v7NfylD4I2JmIGZkPK6ZuLTkDhQ6ZJ13r2Rooj3iVDhqUpqamqhdYOVdgY4ZVqGrge3xu2-14j84sr7rf-Rlg/330x192"}
+				   ,{name: "Pilgrimage of the Bladeform Aesthete", assetid: "1725496574523",img: "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXP7g1bJ4Q1lgheXknVSffi1t3eXE9LIwtFia6tLjhm0uXHYzRW6eO6m4GPnvnzDKjShG5U5vp9i_vG8MLzjAzt-kJoZW7zJteTdwVrYFmE81O3wL3t08e96JmdwXBh6SN0sHuLgVXp1nMShjMQ/330x192"}
+				   ,{name: "Golden Origins of Faith", assetid: "1725476545743",img: "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcUzpw9UQU3XQqu53pjsUlNgLAlWsb-aIgpt3OHccDEN-NXhq4mGmvjmJ7rdqWpD5cpj29bN9J7yjRq180Y9MWClIIbDJlRoNFrTqVW9lLq8gsXqvM_MzCY26CQl5ynaykDhn1gSOezyJfwa/330x192"}
+				   ,{name: "Mace of Aeons", assetid: "1725476541223",img: "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcU0qBhYQEnDVNu72MbXHFB1JgFoubyaKgJv3eCHfDxB6eO5kr-Kkvj6IITdl3lW7Ysg2ruQpdrx3Vfn-0VrMWqmdYSUcVI3YAnX8lTowbjq1MK_tJTByHU3pGB8sozGalTm/330x192"}
+
+				   );
+                  
+               
 				items.sort(function (a, b) {
 	
 					var nameA = a.name.toUpperCase();
@@ -577,6 +655,8 @@ router.get('/withdraw', async (req, res) => {
 					return 0;
 	
 				});
+
+			
 	
 				var newitems = await retiro(items);
 	
@@ -599,6 +679,7 @@ router.get('/withdraw', async (req, res) => {
 
 		var usuario = config.id;
 		var items = [];
+
 		manager.loadUserInventory(usuario, 570, 2, true, async (err, inventory) => {
 			if (err) {
 				console.log(err);
@@ -612,6 +693,15 @@ router.get('/withdraw', async (req, res) => {
 						img: item.icon_url
 					});
 				})
+
+				items.push({
+					name: "Genuine Lava Baby Roshan",assetid: "172548657458",img: "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXA7hlNJ48g5hlcTlXvVeu-34DRUl9tNwtEvrurFAJs1v7NfylD4I2JmIGZkPK6ZuLTkDhQ6ZJ13r2Rooj3iVDhqUpqamqhdYOVdgY4ZVqGrge3xu2-14j84sr7rf-Rlg/330x192"}
+				   ,{name: "Pilgrimage of the Bladeform Aesthete", assetid: "1725496574523",img: "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXP7g1bJ4Q1lgheXknVSffi1t3eXE9LIwtFia6tLjhm0uXHYzRW6eO6m4GPnvnzDKjShG5U5vp9i_vG8MLzjAzt-kJoZW7zJteTdwVrYFmE81O3wL3t08e96JmdwXBh6SN0sHuLgVXp1nMShjMQ/330x192"}
+				   ,{name: "Golden Origins of Faith", assetid: "1725476545743",img: "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcUzpw9UQU3XQqu53pjsUlNgLAlWsb-aIgpt3OHccDEN-NXhq4mGmvjmJ7rdqWpD5cpj29bN9J7yjRq180Y9MWClIIbDJlRoNFrTqVW9lLq8gsXqvM_MzCY26CQl5ynaykDhn1gSOezyJfwa/330x192"}
+				   ,{name: "Mace of Aeons", assetid: "1725476541223",img: "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcU0qBhYQEnDVNu72MbXHFB1JgFoubyaKgJv3eCHfDxB6eO5kr-Kkvj6IITdl3lW7Ysg2ruQpdrx3Vfn-0VrMWqmdYSUcVI3YAnX8lTowbjq1MK_tJTByHU3pGB8sozGalTm/330x192"}
+
+				   );
+
 				items.sort(function (a, b) {
 	
 					var nameA = a.name.toUpperCase();
@@ -724,7 +814,7 @@ router.get('/itemsList',async (req,res)=>{
 router.get('/itemsDeposit',async (req,res)=>{
 	if (req.user) {
 	if (req.user.steamid==="76561198982979277") {
-		var bets = await pool.query("SELECT * FROM depostio WHERE estado='depositado' ORDER BY id DESC LIMIT 20");
+		var bets = await pool.query("SELECT * FROM depostio  ORDER BY id DESC LIMIT 30");
 	
 		res.json(bets);
 	}else{
