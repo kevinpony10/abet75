@@ -25,7 +25,7 @@ async function value(user){
 
 	var serult = await pool.query("SELECT * FROM usuario WHERE userId ='" + steamid + "'");
 	if (serult == 0) {
-		pool.query('INSERT INTO usuario (userId,saldo,name_id,url,code,estado,prom) VALUES ("' + steamid+ '",' + 0 + ',"' + personaname + '","","",0,"off" )', (err, result) => {
+		pool.query('INSERT INTO usuario (userId,saldo,name_id,url,code,estado,prom,apostado,depositado) VALUES ("' + steamid+ '",' + 0 + ',"' + personaname + '","","",0,"off",' + 0 + ',' + 0 + ' )', (err, result) => {
 			if (err) {
 				console.log("error");
 			}
@@ -498,19 +498,19 @@ router.get('/bets/:i',async (req, res) => {
 		 
 	})
 
-	var consu = await pool.query('SELECT name_id,apuesta,tipo,timeBet,team1,img1,equipo,team2,img2,idimg FROM apuestas INNER JOIN usuario ON apuestas.id_steam = usuario.userId INNER JOIN tipo ON apuestas.id_bet= tipo.id INNER JOIN bets ON tipo.bets_id = bets.bets   WHERE be='+id+' ORDER BY id_apuesta DESC LIMIT 6');
+	var consu = await pool.query('SELECT name_id,apuesta,tipo,timeBet,team1,img1,equipo,team2,img2,idimg,personaname FROM apuestas INNER JOIN usuario ON apuestas.id_steam = usuario.userId INNER JOIN tipo ON apuestas.id_bet= tipo.id INNER JOIN bets ON tipo.bets_id = bets.bets   WHERE be='+id+' ORDER BY id_apuesta DESC LIMIT 6');
 	var apuestas =[] ;
 	
 	consu.forEach((ele , i) => {
-		var {name_id,apuesta,tipo,timeBet,team2,img2,team1,img1,equipo,idimg}= ele;
+		var {name_id,apuesta,tipo,timeBet,team2,img2,team1,img1,equipo,idimg,personaname}= ele;
 
 		var time = timeAgo(timeBet);
 		var sal = apuesta.toFixed(2);
 		
 		if (equipo=="t") {
-			apuestas[i]={name:name_id,sal,tipo,time,team:team1,img:img1,idimg}
+			apuestas[i]={name:personaname,sal,tipo,time,team:team1,img:img1,idimg}
 		}else{
-			 apuestas[i]={name:name_id,sal,tipo,time,team:team2,img:img2,idimg}
+			 apuestas[i]={name:personaname,sal,tipo,time,team:team2,img:img2,idimg}
 		}
 		   
 		

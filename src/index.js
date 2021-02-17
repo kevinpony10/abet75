@@ -12,7 +12,6 @@ const pool = require('./config/database');
 const passport = require('passport');
 const SteamStrategy = require('passport-steam').Strategy;
 const cookieParser = require('cookie-parser');
-const SteamCommunity = require('steamcommunity');
 
 //SERVIDOR Y SOCKETS
 const server = require('http').Server(app);
@@ -317,7 +316,14 @@ app.post('/windraw', async (req, res) => {
 																		
 																			steam.acceptConfirmationForObject(identitySecret, offer.id,  function (err) {
 																				if (err) {
-																					res.json({ estado: "Error al cofirmar trade , actualizando saldo espera unos minutos", succes: "error" })
+																					total = total.toFixed(2)
+																					 pool.query("INSERT INTO depostio (steamid,dTime,estado,precio,offertId) VALUES('" + steamid + "',now(),'retiro'," + total + ",'" + offer.id + "')", (err, result) => {
+																						if (err) {	
+																		
+																						} else {	
+																							res.json({ estado: "Error al cofirmar trade , actualizando saldo espera unos minutos", succes: "error" })
+																					}
+																					})
 																				} else {
 																					total = total.toFixed(2)
 																					 pool.query("INSERT INTO depostio (steamid,dTime,estado,precio,offertId) VALUES('" + steamid + "',now(),'retiro'," + total + ",'" + offer.id + "')", (err, result) => {

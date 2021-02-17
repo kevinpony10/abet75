@@ -43,16 +43,21 @@ router.post('/agregar', async (req, res) => {
 			if (porcen2 === "") {
 				res.json({ estado: "Agrega porcentajes", succes: "error" });
 			} else {
-				await pool.query('INSERT INTO bets (team1,team2,img1,img2,game,time,torneo, bo,win,imgTor) VALUES ("' + team1 + '","' + team2 + '","' + img1 + '","' + img2 + '","' + game + '","' + time + '","' + torneo + '","' + bo + '","' + win + '","' + img3 + '")', (err, result) => {
-					if (err) {
-						res.json({ estado: "no se pudo agregar", succes: "error" });
-					} else {
-						res.json({ estado: "Agregado correctamente", succes: "success" });
-						var id = result.insertId;
-						bose(bo, id, porcen1, porcen2);
-					}
-
-				})
+				if (img3 ==="") {
+					res.json({ estado: "Agrega Imagen de torneo", succes: "error" });
+				} else {
+					await pool.query('INSERT INTO bets (team1,team2,img1,img2,game,time,torneo, bo,win,imgTor) VALUES ("' + team1 + '","' + team2 + '","' + img1 + '","' + img2 + '","' + game + '","' + time + '","' + torneo + '","' + bo + '","' + win + '","' + img3 + '")', (err, result) => {
+						if (err) {
+							res.json({ estado: "no se pudo agregar", succes: "error" });
+						} else {
+							res.json({ estado: "Agregado correctamente", succes: "success" });
+							var id = result.insertId;
+							bose(bo, id, porcen1, porcen2);
+						}
+	
+					})
+				}
+				
 			}
 
 		}
