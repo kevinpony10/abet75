@@ -428,14 +428,14 @@ router.post('/itemsBusqueda', async (req, res) => {
 
 
 router.post('/apuesta', async (req, res) => {
-	const { id, team, bets } = req.body;
+	var { id, team, bets } = req.body;
 	var dataT = new Date();
 	
 	var valor = req.body.valor;
 	if (req.user) {
-		const userId = req.user.steamid;
-		const name = req.user.personaname;
-		const img = req.user.avatar;
+		var userId = req.user.steamid;
+		var name = req.user.personaname;
+		var img = req.user.avatar;
 		if (valor <= 0) {
 			valor = valor * -1;
 		}
@@ -443,7 +443,7 @@ router.post('/apuesta', async (req, res) => {
 		pool.query('SELECT id_steam FROM apuestas WHERE id_bet=' + id + ' AND id_steam=' + userId, (err, result) => {
 			if (err) {
 
-				res.json({ estado: "no se pudo realizar", succes: "error" });
+				res.json({ estado: "no se pudo realizar 1", succes: "error" });
 			} else {
 				if (result.length >= 1) {
 					res.json({ estado: "ya tienes apuesta realizadas", succes: "error" });
@@ -452,7 +452,7 @@ router.post('/apuesta', async (req, res) => {
 					pool.query('SELECT saldo,apostado FROM usuario WHERE userId=' + userId, (err, result) => {
 						if (err) {
 
-							res.json({ estado: "no se pudo realizar", succes: "error" });
+							res.json({ estado: "no se pudo realizar 2", succes: "error" });
 						} else {
 
 							var saldo = result[0].saldo;
@@ -472,7 +472,7 @@ router.post('/apuesta', async (req, res) => {
 
 											if (err) {
 
-												res.json({ estado: "no se pudo realizar", succes: "error" });
+												res.json({ estado: "no se pudo realizar 3", succes: "error" });
 											} else {
 												var estado = result[0].estado;
 												var pc1 = (Number(result[0].total1)/Number(result[0].total))*100;
@@ -514,20 +514,20 @@ router.post('/apuesta', async (req, res) => {
 														pool.query("UPDATE usuario Set saldo=? , apostado=? WHERE userId=?", [newSaldo,newApostado, userId], (err, result) => {
 															if (err) {
 
-																res.json({ estado: "no se pudo realizar", succes: "error" });
+																res.json({ estado: "no se pudo realizar 7", succes: "error" });
 															} else {
 
 
 
 																pool.query("UPDATE tipo Set total1=?,total=? WHERE id=?", [newtotal1, newtotal, id], (err, result) => {
 																	if (err) {
-																		res.json({ estado: "no se pudo realizar", succes: "error" });
+																		res.json({ estado: "no se pudo realizar 8", succes: "error" });
 																	} else {
 																		
 
 																		pool.query('INSERT INTO apuestas (id_steam,personaname,id_bet,apuesta,equipo,timeBet,be,idimg,por) VALUES ("' + userId + '","' + name + '",' + id + ',' + valor + ',"t",now(),' + bets + ',"' + img + '",' + xpor1 + ')', (err, result) => {
 																			if (err) {
-																				res.json({ estado: "no se pudo realizar", succes: "error" });
+																				res.json({ estado: "no se pudo realizar 9", succes: "error" });
 																			} else {
 																				res.json({ estado: "Apuesta realizada", succes: "success" });
 																				var id_bet = result.insertId
@@ -573,19 +573,19 @@ router.post('/apuesta', async (req, res) => {
 													pool.query("UPDATE usuario Set saldo=? , apostado=? WHERE userId=?", [newSaldo,newApostado, userId], (err, result) => {
 														if (err) {
 
-															res.json({ estado: "no se pudo realizar", succes: "error" });
+															res.json({ estado: "no se pudo realizar 4", succes: "error" });
 														} else {
 
 
 															pool.query("UPDATE tipo Set total1=?,total=? WHERE id=?", [newtotal1, newtotal, id], (err, result) => {
 																if (err) {
-																	res.json({ estado: "no se pudo realizar", succes: "error" });
+																	res.json({ estado: "no se pudo realizar 5", succes: "error" });
 																} else {
 
 
 																	pool.query('INSERT INTO apuestas (id_steam,personaname,id_bet,apuesta,equipo,timeBet,be,idimg,por) VALUES ("' + userId + '","' + name + '",' + id + ',' + valor + ',"t",now(),' + bets + ',"' + img + '",' + xpor1 + ')', (err, result) => {
 																		if (err) {
-																			res.json({ estado: "no se pudo realizar", succes: "error" });
+																			res.json({ estado: "no se pudo realizar 6", succes: "error" });
 																		} else {
 																			res.json({ estado: "Apuesta realizada", succes: "success" });
 																			var id_bet = result.insertId
@@ -682,17 +682,17 @@ router.post('/apuesta', async (req, res) => {
 
 														pool.query("UPDATE usuario Set saldo=? , apostado=? WHERE userId=?", [newSaldo,newApostado, userId], (err, result) => {
 															if (err) {
-																res.json({ estado: "no se pudo realizar", succes: "error" });
+																res.json({ estado: "no se pudo realizar 10", succes: "error" });
 															} else {
 
 																pool.query("UPDATE tipo Set total2=?,total=? WHERE id=?", [newtotal2, newtotal, id], (err, result) => {
 																	if (err) {
-																		res.json({ estado: "no se pudo realizar", succes: "error" });
+																		res.json({ estado: "no se pudo realizar 11", succes: "error" });
 																	} else {
 
 																		pool.query('INSERT INTO apuestas (id_steam,personaname,id_bet,apuesta,equipo,timeBet,be,idimg,por) VALUES ("' + userId + '","' + name + '",' + id + ',' + valor + ',"e",now(),' + bets + ',"' + img + '",' + xpor2 + ')', (err, result) => {
 																			if (err) {
-																				res.json({ estado: "no se pudo realizar", succes: "error" });
+																				res.json({ estado: "no se pudo realizar 12", succes: "error" });
 																			} else {
 
 																				res.json({ estado: "Apuesta realizada", succes: "success" });
@@ -738,17 +738,17 @@ router.post('/apuesta', async (req, res) => {
 
 													pool.query("UPDATE usuario Set saldo=? , apostado=? WHERE userId=?", [newSaldo,newApostado, userId], (err, result) => {
 														if (err) {
-															res.json({ estado: "no se pudo realizar", succes: "error" });
+															res.json({ estado: "no se pudo realizar 13", succes: "error" });
 														} else {
 
 															pool.query("UPDATE tipo Set total2=?,total=? WHERE id=?", [newtotal2, newtotal, id], (err, result) => {
 																if (err) {
-																	res.json({ estado: "no se pudo realizar", succes: "error" });
+																	res.json({ estado: "no se pudo realizar 14", succes: "error" });
 																} else {
 
 																	pool.query('INSERT INTO apuestas (id_steam,personaname,id_bet,apuesta,equipo,timeBet,be,idimg,por) VALUES ("' + userId + '","' + name + '",' + id + ',' + valor + ',"e",now(),' + bets + ',"' + img + '",' + xpor2 + ')', (err, result) => {
 																		if (err) {
-																			res.json({ estado: "no se pudo realizar", succes: "error" });
+																			res.json({ estado: "no se pudo realizar 15", succes: "error" });
 																		} else {
 
 																			res.json({ estado: "Apuesta realizada", succes: "success" });

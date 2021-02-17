@@ -3,9 +3,9 @@ const router = express.Router();
 const pool = require('../config/database');
 var timeAgo = require('node-time-ago');
 const config = require('../config/config.js');
-var TradeOfferManager = require('steam-tradeoffer-manager');
+const TradeOfferManager = require('steam-tradeoffer-manager');
 
-var manager = new TradeOfferManager({
+const manager = new TradeOfferManager({
     "domain": "https://serversteam.vercel.app/", //your domain API KEY
     "language": "en",
     "pollInterval": 30000,

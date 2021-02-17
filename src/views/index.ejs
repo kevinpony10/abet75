@@ -436,8 +436,8 @@
                 $(function () {
                 $('.update-buton').on('click',  function () {
                   let bet = $(this).attr('id')
-                  var url = "http://localhost:3000/bets/";
-                  $(location).attr('href' + bet);
+                  var url = "bets/";
+                  $(location).attr('href', url + bet);
                 })
               })
 

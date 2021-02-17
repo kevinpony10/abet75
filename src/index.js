@@ -12,22 +12,21 @@ const pool = require('./config/database');
 const passport = require('passport');
 const SteamStrategy = require('passport-steam').Strategy;
 const cookieParser = require('cookie-parser');
-var SteamCommunity = require('steamcommunity');
+const SteamCommunity = require('steamcommunity');
 
 //SERVIDOR Y SOCKETS
-var server = require('http').Server(app);
+const server = require('http').Server(app);
 require('./config/socket').connection(server);
-const {getSocket}= require('./config/socket')
 
 const localBet = "http://localhost:3000/";
 const abetskin = "https://abetskins.com/";
 
-var SteamCommunity = require('steamcommunity');
-var SteamTotp = require("steam-totp");
-var steam = new SteamCommunity();
-var TradeOfferManager = require('steam-tradeoffer-manager');
+const SteamCommunity = require('steamcommunity');
+const SteamTotp = require("steam-totp");
+const steam = new SteamCommunity();
+const TradeOfferManager = require('steam-tradeoffer-manager');
 const config = require('./config/config.js');
-var manager = new TradeOfferManager({
+const manager = new TradeOfferManager({
     "domain": "https://abetskins.com/", //your domain API KEY
     "language": "en",
     "pollInterval": 30000,
@@ -36,12 +35,12 @@ var manager = new TradeOfferManager({
   
   });
 
-var logOnOptions = {
+const logOnOptions = {
 	'accountName': config.accountName, //your username
 	'password': config.password, //your pass
 	'twoFactorCode': SteamTotp.generateAuthCode(config.sharedSecret) 
 };
-var identitySecret = config.identitySecret;
+const identitySecret = config.identitySecret;
 
 
 
@@ -81,11 +80,11 @@ passport.use(new SteamStrategy({
 
 
 app.use(cookieParser());
-var sesion =session({
+const sesion =session({
 	key: 'session_id'
 	, secret: 'almatrass'
 	, resave: true
-	, saveUninitialized: false
+	, saveUninitialized: true
 	, cookie: {
 		maxAge: 86400000
 	}
