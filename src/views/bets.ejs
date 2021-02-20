@@ -257,7 +257,7 @@
                    <div style="width: 50%;" class="textjust"><span>${partida[0].name}</span></div>
                     <span class="badge badge-secondary badge-pill">
                      <img src="/icon/gem.svg" alt="" style="width: 14px;" class="img-fluid rounded mx-auto "> ${partida[0].sal}</span>
-                </li>
+                 </li>
                    <div class=" text-center bord2">
                       <small class="col  text-light  badge stylver"><i class="fas fa-clock "></i> ${partida[0].time}</small>
                     </div>  
@@ -330,7 +330,7 @@
                                     team: team,
                                     bets:"<%-consulta[0].bets-%>"
                                 },
-                                success: function (response) {
+                                success: function (response) {                                   
                                     alertas(response);
                                   
                                 }
@@ -390,6 +390,10 @@
                
 
     function alertas(response) {
+        if (response.sald) {
+        $('#saldo').replaceWith(`<span>${response.sald}</span>`);
+ 
+        }
 
         Swal.fire({
             icon: response.succes,

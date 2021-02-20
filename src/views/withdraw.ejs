@@ -185,7 +185,7 @@
                         customClass: {
                             title: "text-light"
                         },
-                    timer: 2500,
+                    timer: 1800,
                     }).then(() => {
                         $.ajax({
                             url: '/windraw',
@@ -213,6 +213,8 @@
                         },
                         footer: `<span class="text-light"><strong class="text-danger">Nota:</strong> Puedes aceptar la oferta <a href="https://steamcommunity.com/tradeoffer/${response.offer}/" target="_blank">aquí</a> para más seguridad.</span>`
                     })
+                    $('#saldo').replaceWith(`<span>${response.newsaldo}</span>`);
+
                          
                      } else {
                         Swal.fire({

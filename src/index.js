@@ -29,8 +29,8 @@ const manager = new TradeOfferManager({
     "domain": "https://abetskins.com/", //your domain API KEY
     "language": "en",
     "pollInterval": 30000,
-    "cancelTime" : 120000,
-    "pendingCancelTime" : 120000
+    "cancelTime" : 600000,
+    "pendingCancelTime" : 600000
   
   });
 
@@ -255,6 +255,7 @@ app.post('/windraw', async (req, res) => {
 		var data = req.body;
 		var steamid = req.user.steamid;
 		var offer="";
+		var sald=0;
 		
 			var result = await pool.query("SELECT * FROM usuario WHERE userId ='" + steamid + "'");
 			var its = await pool.query("SELECT item,retiro FROM lista");
@@ -293,10 +294,12 @@ app.post('/windraw', async (req, res) => {
 											}
 										}
 									})
+									if (saldo>=total) {	
 									if (cont == data.length) {
-										if (saldo>=total) {																																					
-														let newSaldo = saldo - total;
+																																														
+														var newSaldo = saldo - total;
 														newSaldo = newSaldo.toFixed(2);
+														sald = newSaldo;
 														pool.query("UPDATE usuario Set oferta='on' , saldo=? WHERE userId=?", [newSaldo,steamid], (err, result) => {
 															if (err) {
 																res.json({ estado: "Error de conexión intentalo mas tarde", succes: "error" })
@@ -311,30 +314,31 @@ app.post('/windraw', async (req, res) => {
 																				res.json({ estado: "Error con el servidor de Steam", succes: "error" });
 																			}
 																		});
+																		console.log(err)
 																	} else {
 																		if (status == 'pending') {
 																		
-																			steam.acceptConfirmationForObject(identitySecret, offer.id,  function (err) {
+																			  steam.acceptConfirmationForObject(identitySecret, offer.id, function (err) {
 																				if (err) {
 																					total = total.toFixed(2)
-																					 pool.query("INSERT INTO depostio (steamid,dTime,estado,precio,offertId) VALUES('" + steamid + "',now(),'retiro'," + total + ",'" + offer.id + "')", (err, result) => {
-																						if (err) {	
-																		
-																						} else {	
+																					pool.query("INSERT INTO depostio (steamid,dTime,estado,precio,offertId) VALUES('" + steamid + "',now(),'retiro'," + total + ",'" + offer.id + "')", (err, result) => {
+																						if (err) {
+
+																						} else {
 																							res.json({ estado: "Error al cofirmar trade , actualizando saldo espera unos minutos", succes: "error" })
-																					}
+																						}
 																					})
 																				} else {
 																					total = total.toFixed(2)
-																					 pool.query("INSERT INTO depostio (steamid,dTime,estado,precio,offertId) VALUES('" + steamid + "',now(),'retiro'," + total + ",'" + offer.id + "')", (err, result) => {
-																						if (err) {	
-																							console.log(err)																		
-																						} else {	
-																							res.json({ estado: "Oferta enviada correctamente", succes: "success", offer: offer.id });
+																					pool.query("INSERT INTO depostio (steamid,dTime,estado,precio,offertId) VALUES('" + steamid + "',now(),'retiro'," + total + ",'" + offer.id + "')", (err, result) => {
+																						if (err) {
+																							console.log(err)
+																						} else {
+																							res.json({ estado: "Oferta enviada correctamente", succes: "success", offer: offer.id ,newsaldo:sald});
 
-																					}
+																						}
 																					})
-																				}													
+																				}
 																			});
 																		}
 
@@ -345,10 +349,11 @@ app.post('/windraw', async (req, res) => {
 														})																																					
 											
 										} else {
-											res.json({ estado: "Saldo Insuficiente", succes: "error" })	
+											res.json({ estado: "Algun articulo ya no esta disponible", succes: "error" })
+										
 										}
 									} else {
-										res.json({ estado: "Algun articulo ya no esta disponible", succes: "error" })
+										res.json({ estado: "Saldo Insuficiente", succes: "error" })	
 								}
 								}
 							})
@@ -369,12 +374,18 @@ app.use(require('./routes'));
 app.use(require('./routes/peticiones'));
 
 manager.on("sentOfferChanged", async (offer, oldState) => { 
-    try {
-        let offertId = offer.id;
+    
+		let offertId = offer.id;
+		var resultados = await pool.query("SELECT * FROM depostio WHERE offertId ='" + offertId + "'");
+		
+		if (resultados.length <= 0 ) {
+			console.log("no hay datos kevin")
+		} else {
+			
+		
         if (offer.state === 2) {
             console.log("oferta enviada")
         } else {
-            var resultados = await pool.query("SELECT * FROM depostio WHERE offertId ='" + offertId + "'");
             if (resultados[0].estado === "depositado") {
                 console.log(` depositado`);
                 if (offer.state === 3) {
@@ -444,10 +455,9 @@ manager.on("sentOfferChanged", async (offer, oldState) => {
                     })
                 }
             }
-        }
-    } catch (error) {
-        console.log(error);
-    }
+		}
+	}
+    
      });
 
 server.listen(app.get('port'), function() {

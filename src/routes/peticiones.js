@@ -435,7 +435,7 @@ router.post('/itemsBusqueda', async (req, res) => {
 router.post('/apuesta', async (req, res) => {
 	var { id, team, bets } = req.body;
 	var dataT = new Date();
-	
+	var sald =0;
 	var valor = req.body.valor;
 	if (req.user) {
 		var userId = req.user.steamid;
@@ -470,7 +470,9 @@ router.post('/apuesta', async (req, res) => {
 
 									if (team == "t") {
 										var newSaldo = saldo - valor;
-										var newApostado = apostado + valor; 
+										var newApostado = Number(apostado) + Number(valor);
+										sald = newSaldo; 
+										sald=sal.toFixed(2);
 										//posible error
 
 										pool.query('SELECT total1,total,time,estado FROM tipo INNER JOIN bets ON bets.bets=tipo.bets_id WHERE id=' + id, (err, result) => {
@@ -534,7 +536,7 @@ router.post('/apuesta', async (req, res) => {
 																			if (err) {
 																				res.json({ estado: "no se pudo realizar 9", succes: "error" });
 																			} else {
-																				res.json({ estado: "Apuesta realizada", succes: "success" });
+																				res.json({ estado: "Apuesta realizada", succes: "success" ,sald:sald});
 																				var id_bet = result.insertId
 
 																				pool.query('SELECT personaname,apuesta,tipo,timeBet,team1,img1,idimg,por FROM apuestas INNER JOIN usuario ON apuestas.id_steam = usuario.userId INNER JOIN tipo ON apuestas.id_bet= tipo.id INNER JOIN bets ON tipo.bets_id = bets.bets   WHERE id_apuesta=' + id_bet, (err, result) => {
@@ -544,8 +546,7 @@ router.post('/apuesta', async (req, res) => {
 																						var { personaname, apuesta, tipo, timeBet, team1, img1, idimg,por} = result[0]
 																						var time = timeAgo(timeBet);
 																						var sal = apuesta.toFixed(2);
-																					
-																						var mensaje = [{ name: personaname, sal, tipo, time, team: team1, img: img1, idimg,por }]
+																						var mensaje = [{ name: personaname, sal, tipo, time, team: team1, img: img1, idimg,por}]
 																						getSocket().in(bets).emit('new', mensaje);
 																					}
 																				})
@@ -592,7 +593,7 @@ router.post('/apuesta', async (req, res) => {
 																		if (err) {
 																			res.json({ estado: "no se pudo realizar 6", succes: "error" });
 																		} else {
-																			res.json({ estado: "Apuesta realizada", succes: "success" });
+																			res.json({ estado: "Apuesta realizada", succes: "success",sald:sald });
 																			var id_bet = result.insertId
 
 																			pool.query('SELECT personaname,apuesta,tipo,timeBet,team1,img1,idimg,por FROM apuestas INNER JOIN usuario ON apuestas.id_steam = usuario.userId INNER JOIN tipo ON apuestas.id_bet= tipo.id INNER JOIN bets ON tipo.bets_id = bets.bets   WHERE id_apuesta=' + id_bet, (err, result) => {
@@ -602,7 +603,7 @@ router.post('/apuesta', async (req, res) => {
 																					var { personaname, apuesta, tipo, timeBet, team1, img1, idimg,por } = result[0]
 																					var time = timeAgo(timeBet);
 																					var sal = apuesta.toFixed(2);
-
+																					console.log(newSaldo)
 																					var mensaje = [{ name: personaname, sal, tipo, time, team: team1, img: img1, idimg,por }]
 																					getSocket().in(bets).emit('new', mensaje);
 																				}
@@ -638,7 +639,9 @@ router.post('/apuesta', async (req, res) => {
 									} else {
 
 										var newSaldo = saldo - valor;
-										var newApostado = apostado + valor; 
+										sald = newSaldo;
+										sald=sal.toFixed(2);
+										var newApostado = Number(apostado) + Number(valor); 
 										//posible error
 
 										pool.query('SELECT total2,total,time,estado FROM tipo INNER JOIN bets ON bets.bets=tipo.bets_id  WHERE id=' + id, (err, result) => {
@@ -700,7 +703,7 @@ router.post('/apuesta', async (req, res) => {
 																				res.json({ estado: "no se pudo realizar 12", succes: "error" });
 																			} else {
 
-																				res.json({ estado: "Apuesta realizada", succes: "success" });
+																				res.json({ estado: "Apuesta realizada", succes: "success" , sald:sald});
 																				var id_bet = result.insertId
 																				pool.query('SELECT personaname,apuesta,tipo,timeBet,team2,img2,idimg,por FROM apuestas INNER JOIN usuario ON apuestas.id_steam = usuario.userId INNER JOIN tipo ON apuestas.id_bet= tipo.id INNER JOIN bets ON tipo.bets_id = bets.bets   WHERE id_apuesta=' + id_bet, (err, result) => {
 																					if (err) {
@@ -709,8 +712,8 @@ router.post('/apuesta', async (req, res) => {
 																						var { personaname, apuesta, tipo, timeBet, team2, img2, idimg ,por} = result[0]
 																						var time = timeAgo(timeBet);
 																						var sal = apuesta.toFixed(2);
-
-																						var mensaje = [{ name: personaname, sal, tipo, time, team: team2, img: img2, idimg,por }]
+																						
+																						var mensaje = [{ name: personaname, sal, tipo, time, team: team2, img: img2, idimg,por}]
 																						getSocket().in(bets).emit('new', mensaje);
 																					}
 																				})
@@ -756,7 +759,7 @@ router.post('/apuesta', async (req, res) => {
 																			res.json({ estado: "no se pudo realizar 15", succes: "error" });
 																		} else {
 
-																			res.json({ estado: "Apuesta realizada", succes: "success" });
+																			res.json({ estado: "Apuesta realizada", succes: "success",sald:sald });
 																			var id_bet = result.insertId
 																			pool.query('SELECT personaname,apuesta,tipo,timeBet,team2,img2,idimg FROM apuestas INNER JOIN usuario ON apuestas.id_steam = usuario.userId INNER JOIN tipo ON apuestas.id_bet= tipo.id INNER JOIN bets ON tipo.bets_id = bets.bets   WHERE id_apuesta=' + id_bet, (err, result) => {
 																				if (err) {
@@ -766,7 +769,7 @@ router.post('/apuesta', async (req, res) => {
 																					var time = timeAgo(timeBet);
 																					var sal = apuesta.toFixed(2);
 																					
-																					var mensaje = [{ name: personaname, sal, tipo, time, team: team2, img: img2, idimg,por }]
+																					var mensaje = [{ name: personaname, sal, tipo, time, team: team2, img: img2, idimg,por}]
 																					getSocket().in(bets).emit('new', mensaje);
 																				}
 																			})
